@@ -1,0 +1,28 @@
+{
+  "name": "pluma-app",
+  "version": "0.0.0",
+  "authors": [
+    "Diego Paez <paez.di@gmail.com>"
+  ],
+  "description": "Pluma app HW sketching frontend",
+  "main": "public/app/main.js",
+  "keywords": [
+    "hardware",
+    "sketching",
+    "sketch"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "backbone": "~1.0.0",
+    "underscore": "latest",
+    "jquery": "latest"
+  }
+}
