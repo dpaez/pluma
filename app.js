@@ -2,6 +2,7 @@
  * Module dependencies.
  * General Stuff
  */
+'use strict';
 
 var express = require('express')
   , path = require('path')
@@ -9,7 +10,7 @@ var express = require('express')
 
 var app = express();
 
-// /* Lets see if this will remain here or not */
+// Lets see if this will remain here or not...
 app.configure(function(){
 
   function compile(str, path) {
