@@ -2,7 +2,24 @@
  * App Backbone Router
  */
 
-var Router = (function( _, Backbone ){
+PlumaApp.Router = Backbone.Router.extend({
+  
+  routes: {
+    'step1': 'launchStepOne',
+    'step2': 'launchStepTwo',
+    'step3': 'launchStepThree'
+  },
 
+  launchStepOne: function(){
+    step1.launch();
+  },
 
-}( _, Backbone ));
+  launchStepTwo: function(){
+    // TODO
+  },
+
+  launchStepThree: function(){
+    // TODO
+  }
+
+});

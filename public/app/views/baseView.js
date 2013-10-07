@@ -1,6 +1,10 @@
+'use strict';
+
+var PlumaApp = PlumaApp || {};
+
 PlumaApp.BaseView = Backbone.View.extend({
 
-  constructor: function(){
+  constructor: function( options ){
     Backbone.View.call(this, options);
     this.viewUUID = this.guid();
   },
@@ -12,8 +16,8 @@ PlumaApp.BaseView = Backbone.View.extend({
   },
 
   guid: function(){
-    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-      s4() + '-' + s4() + s4() + s4();
+    return this.s4() + this.s4() + '-' + this.s4() + '-' + 
+    this.s4() + '-' +  this.s4() + '-' + this.s4() + this.s4() + this.s4();
   },
 
   render: function(){

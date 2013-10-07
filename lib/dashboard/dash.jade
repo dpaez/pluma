@@ -3,3 +3,16 @@ extends ../views/layout
 block content
   h2 dashboard
   div.panel
+    div#step-one
+      div#leap-container
+        h2 Create a new gesture
+    div#step-two
+      div#duino-container
+        h2 Connect gestures with actions
+    div#step-three
+        h2 Add Visual Feedback
+      div#graphics-container
+
+  div.footer
+    button(class='prev-step', name='prev-step') Back
+    button(class='next-step', name='next-step') Next

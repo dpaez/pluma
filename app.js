@@ -38,8 +38,10 @@ app.configure('development', function(){
  * sub apps
  */
 var dash = require('./lib/dashboard');
+var bbtemplate = require('./lib/BBTemplates');
 
 app.use(dash);
+app.use(bbtemplate);
 
 app.listen(app.get('port'));
 console.log("Express server listening on port " + app.get('port'));
