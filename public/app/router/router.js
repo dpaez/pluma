@@ -1,6 +1,9 @@
 /**
  * App Backbone Router
  */
+'use strict';
+
+var PlumaApp = PlumaApp || {};
 
 PlumaApp.Router = Backbone.Router.extend({
   
@@ -16,10 +19,13 @@ PlumaApp.Router = Backbone.Router.extend({
 
   launchStepTwo: function(){
     // TODO
+    console.log('STEP 2');
+    
   },
 
   launchStepThree: function(){
     // TODO
+    console.log('STEP 3');
   }
 
 });

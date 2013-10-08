@@ -7,16 +7,24 @@ html
   body
 
     block content
+
+    block templates
+
     // Vendor Scipts
     script(src='/vendor/jquery/jquery.min.js')
-    script(src='/vendor/underscore/underscore-min.js')
-    script(src='/vendor/backbone/backbone-min.js')
+    script(src='/vendor/underscore/underscore.js')
+    script(src='/vendor/backbone/backbone.js')
     script(src='/vendor/leapjs/leap.js')
 
+
     // App Scripts
+    script(src='/app/utils/templateCache.js')
     script(src='/app/views/baseView.js')
     script(src='/app/views/parentView.js')
     script(src='/app/views/step1.js')
+    script(src='/app/views/leapChildView.js')
+    script(src='/app/router/router.js')
+    script(src='/app/starter.js')
     script(src='/app/main.js')
 
-    block templates
+    

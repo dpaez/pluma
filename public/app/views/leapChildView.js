@@ -2,9 +2,13 @@
  * Child View: Leap trainer
  * Deps: Underscore, Backbone, Leapjs, text
  */
+'use strict';
+
 PlumaApp.LeapView = PlumaApp.BaseView.extend({
+
   el: '#leap-container',
-  template: _.template($('#leap-tpl')),
+
+  template: '#leap-tpl',
 
   events: {
     'click .start-trainer': 'newGesture',
@@ -12,7 +16,9 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
   },
 
   onRender: function(){
-    this.$el.html(this.template);
+    var template = TemplateCache.get(this.template);
+    var html = template();
+    this.$el.html(html);
     return this;
   },
 

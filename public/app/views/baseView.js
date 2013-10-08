@@ -5,7 +5,7 @@ var PlumaApp = PlumaApp || {};
 PlumaApp.BaseView = Backbone.View.extend({
 
   constructor: function( options ){
-    Backbone.View.call(this, options);
+    Backbone.View.call( this, options );
     this.viewUUID = this.guid();
   },
 

@@ -31,7 +31,7 @@ PlumaApp.ParentView = PlumaApp.BaseView.extend({
   },
 
   addChildView: function( view ){
-    if ( !(view instanceof View) ) {
+    if ( !(view instanceof Backbone.View) ) {
       throw new Error("Child view must be a Backbone.View");
     }
     this.childViews.push( view );
@@ -68,7 +68,7 @@ PlumaApp.ParentView = PlumaApp.BaseView.extend({
     this.$el.append( view.$el );
   },
 
-  renderView: function( View ){
+  renderView: function( view ){
     view.render();
     return view;
   },
