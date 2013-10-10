@@ -1,6 +1,6 @@
 /**
  * Child View: Leap trainer
- * Deps: Underscore, Backbone, Leapjs, text
+ * Deps: Underscore, Backbone, trainer, text
  */
 'use strict';
 
@@ -16,19 +16,20 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
   },
 
   onRender: function(){
-    var template = TemplateCache.get(this.template);
+    var template = TemplateCache.get( this.template );
     var html = template();
-    this.$el.html(html);
+    this.$el.html( html );
     return this;
   },
 
   newGesture: function(){
-    console.log('calling new gesture');
+    console.log( 'calling new gesture' );
+    //trigger (leaptrainer) create event
   },
 
   cancelNewGesture: function(){
-    console.log('calling stop gesture');
-  }
+    console.log( 'calling stop gesture' );
+  },
 
 
 });

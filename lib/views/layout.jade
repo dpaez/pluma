@@ -10,12 +10,14 @@ html
 
     block templates
 
-    // Vendor Scipts
+    include ../BBTemplates/leapTemplate
+
+    // Vendor Scripts
     script(src='/vendor/jquery/jquery.min.js')
     script(src='/vendor/underscore/underscore.js')
     script(src='/vendor/backbone/backbone.js')
     script(src='/vendor/leapjs/leap.js')
-
+    script(src='/vendor/leaptrainer.js')
 
     // App Scripts
     script(src='/app/utils/templateCache.js')
@@ -24,7 +26,7 @@ html
     script(src='/app/views/step1.js')
     script(src='/app/views/leapChildView.js')
     script(src='/app/router/router.js')
+    script(src='/app/trainer.js')
     script(src='/app/starter.js')
     script(src='/app/main.js')
 
-    

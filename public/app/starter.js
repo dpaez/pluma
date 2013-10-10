@@ -1,8 +1,8 @@
 /**
- * Application entry point
+ * Pluma App igniter module
  */
 var PlumaAppMain = function( _, Backbone, $, PlumaApp ) {
-  
+
   var step1,
     step2,
     step3,
@@ -24,7 +24,10 @@ var PlumaAppMain = function( _, Backbone, $, PlumaApp ) {
     steps.push(step1);
     //steps.push(step2);
     //steps.push(step3);
-    
+
+    // Start Leap trainer
+    PlumaApp.LeapTrainer.start();
+
     // Start router
     router = new PlumaApp.Router();
     Backbone.history.start({pushState: true});
@@ -36,11 +39,13 @@ var PlumaAppMain = function( _, Backbone, $, PlumaApp ) {
     steps = [];
   };
 
+  // Public API
+
   function publicStart(){
     _prepare();
     _start();
   };
-  
+
   return {
     start: publicStart
   };
