@@ -2,6 +2,8 @@
 
 var PlumaApp = PlumaApp || {};
 
+_.extend(PlumaApp, Backbone.Events);
+
 PlumaApp.BaseView = Backbone.View.extend({
 
   constructor: function( options ){
@@ -16,7 +18,7 @@ PlumaApp.BaseView = Backbone.View.extend({
   },
 
   guid: function(){
-    return this.s4() + this.s4() + '-' + this.s4() + '-' + 
+    return this.s4() + this.s4() + '-' + this.s4() + '-' +
     this.s4() + '-' +  this.s4() + '-' + this.s4() + this.s4() + this.s4();
   },
 

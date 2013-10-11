@@ -27,11 +27,12 @@ var PlumaAppMain = function( _, Backbone, $, PlumaApp ) {
 
     // Start Leap trainer
     PlumaApp.LeapTrainer.start();
+    console.log(PlumaApp.LeapTrainer);
 
     // Start router
     router = new PlumaApp.Router();
     Backbone.history.start({pushState: true});
-
+    console.log('--------------------------------------------------------------------------------');
     console.log('Starting Pluma App...');
   };
 

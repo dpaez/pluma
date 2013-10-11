@@ -25,6 +25,7 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
   newGesture: function(){
     console.log( 'calling new gesture' );
     //trigger (leaptrainer) create event
+    PlumaApp.trigger( 'plumaleap:create', 'testGesture' );
   },
 
   cancelNewGesture: function(){
