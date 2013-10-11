@@ -6,9 +6,9 @@
 
 PlumaApp.LeapView = PlumaApp.BaseView.extend({
 
-  el: '#leap-container',
+  el: '#gesture-sandbox',
 
-  template: '#leap-tpl',
+  template: '#leap-trainer-tpl',
 
   events: {
     'click .start-trainer': 'newGesture',

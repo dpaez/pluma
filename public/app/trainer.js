@@ -2,17 +2,16 @@
  * Pluma Leap Trainer Module
  * Deps: leaptrainer.js (all the credit goes to: https://github.com/roboleary/LeapTrainer.js)
  */
-PlumaApp.LeapTrainer = function( _, Backbone, LeapTrainer ) {
+PlumaApp.trainer = {};
+PlumaApp.controller = {};
 
-  // TODO: attach these variables to the PlumaApp object.
-  var trainer,
-    controller;
+PlumaApp.LeapTrainer = function( _, Backbone, LeapTrainer ) {
 
   function _init(){
     // New Leap controller instance
-    controller = new Leap.Controller();
+    PlumaApp.controller = new Leap.Controller();
     // Start leap trainer
-    trainer = new LeapTrainer.Controller( {controller: controller} );
+    PlumaApp.trainer = new LeapTrainer.Controller( {controller: PlumaApp.controller} );
 
     // Specific module events
     PlumaApp.on({
@@ -28,8 +27,8 @@ PlumaApp.LeapTrainer = function( _, Backbone, LeapTrainer ) {
 
   function _train(gestureName){
     console.log('Calling leaptrainer create');
-    trainer.create(gestureName);
-    trainer.startTraining(gestureName);
+    PlumaApp.trainer.create(gestureName);
+    PlumaApp.trainer.startTraining(gestureName);
   };
 
   function _leapConnected(){

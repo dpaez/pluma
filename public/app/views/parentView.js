@@ -6,29 +6,10 @@ PlumaApp.ParentView = PlumaApp.BaseView.extend({
     this.childViews = [];
 
     this.listenTo( this, 'add:children', this.childrenAdded );
-  },
-
-  events: {
-    'click .next-step': 'nextStep',
-    'click .prev-step': 'prevStep'
-  },
-
-  nextStep: function(){
-    if ( this.currentPos >= steps.length ){ return; }
-
-    this.remove();
-
-    steps[this.currentPos++].launch();
 
   },
 
-  prevStep: function(){
-    if ( this.currentPos <= steps.length ){ return; }
-
-    this.remove();
-
-    steps[this.currentPos--].launch();
-  },
+  events: {},
 
   addChildView: function( view ){
     if ( !(view instanceof Backbone.View) ) {
@@ -52,10 +33,10 @@ PlumaApp.ParentView = PlumaApp.BaseView.extend({
     return this;
   },
 
-  // Extends the view's remove, by calling `removeSubviews`
+  // Extends the view's remove, by calling `removeChildViews`
   // if any childViews exist.
   remove: function(){
-    PlumaApp.BaseView.prototype.remove.call(this);
+    //PlumaApp.BaseView.prototype.remove.call(this);
     if ( this.childViews ) this.removeChildViews();
   },
 

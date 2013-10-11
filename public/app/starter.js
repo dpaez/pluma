@@ -3,41 +3,47 @@
  */
 var PlumaAppMain = function( _, Backbone, $, PlumaApp ) {
 
-  var step1,
+  var app, 
+    step1,
     step2,
     step3,
     leapView,
-    steps,
     router;
 
   function _start(){
-    // Create App Views
 
+    // Create App Views
+    app = new PlumaApp.AppView();
     step1 = new PlumaApp.StepOneView();
     leapView = new PlumaApp.LeapView();
-    step1.addChildView(leapView);
+    step1.addChildView( leapView );
     // Not Implemented Yet
-    //step2 = new PlumaApp.StepTwoView();
+    step2 = new PlumaApp.StepTwoView();
     // Not Implemented Yet
     //step3 = new PlumaApp.StepThreeView();
 
-    steps.push(step1);
-    //steps.push(step2);
-    //steps.push(step3);
+    PlumaApp.steps.push( step1 );
+    PlumaApp.steps.push( step2 );
+    //PlumaApp.steps.push( step3 );
+    
+    app.addChildView(step1);
+    app.addChildView(step2);
 
     // Start Leap trainer
     PlumaApp.LeapTrainer.start();
-    console.log(PlumaApp.LeapTrainer);
 
     // Start router
     router = new PlumaApp.Router();
-    Backbone.history.start({pushState: true});
+    Backbone.history.start( {pushState: true} );
     console.log('--------------------------------------------------------------------------------');
     console.log('Starting Pluma App...');
+
+    step1.launch();
   };
 
   function _prepare(){
-    steps = [];
+    PlumaApp.currentPos = 0;
+    PlumaApp.steps = [];
   };
 
   // Public API

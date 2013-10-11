@@ -1,2 +1,4 @@
-body{font:14px "Lucida Grande",Helvetica,Arial,sans-serif;background-size:100%;top:0;left:0;right:0;bottom:0;overflow-y:hidden;overflow-x:hidden;width:100%}
+body{font:100% "Lucida Grande",Helvetica,Arial,sans-serif;top:0;left:0;right:0;bottom:0;overflow-y:hidden;overflow-x:hidden;width:100%;padding:0;margin:0}
 a{color:#00b7ff}
+.step{width:95%;height:400px;margin-left:auto;margin-right:auto;border-width:1px;border-style:solid;border-color:#000}
+.footer{width:95%;height:100px;text-align:center;margin-left:auto;margin-right:auto;margin-top:50px}
