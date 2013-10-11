@@ -15,12 +15,12 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
     'click .stop-trainer': 'cancelNewGesture',
   },
 
-  onRender: function(){
-    var template = TemplateCache.get( this.template );
-    var html = template();
-    this.$el.html( html );
-    return this;
-  },
+  // onRender: function(){
+  //   var template = TemplateCache.get( this.template );
+  //   var html = template();
+  //   this.$el.html( html );
+  //   return this;
+  // },
 
   newGesture: function(){
     console.log( 'calling new gesture' );

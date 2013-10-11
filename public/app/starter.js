@@ -3,7 +3,7 @@
  */
 var PlumaAppMain = function( _, Backbone, $, PlumaApp ) {
 
-  var app, 
+  var app,
     step1,
     step2,
     step3,
@@ -25,7 +25,7 @@ var PlumaAppMain = function( _, Backbone, $, PlumaApp ) {
     PlumaApp.steps.push( step1 );
     PlumaApp.steps.push( step2 );
     //PlumaApp.steps.push( step3 );
-    
+
     app.addChildView(step1);
     app.addChildView(step2);
 
@@ -35,10 +35,10 @@ var PlumaAppMain = function( _, Backbone, $, PlumaApp ) {
     // Start router
     router = new PlumaApp.Router();
     Backbone.history.start( {pushState: true} );
-    console.log('--------------------------------------------------------------------------------');
-    console.log('Starting Pluma App...');
+    console.log( '---------------------' );
+    console.log( 'Starting Pluma App...' );
 
-    step1.launch();
+    app.firstStep();
   };
 
   function _prepare(){

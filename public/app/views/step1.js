@@ -4,13 +4,22 @@
 
 PlumaApp.StepOneView = PlumaApp.ParentView.extend({
 
-  el: '#leap-container',
-  
+  el: '#step-one',
+  template: '#leap-container-tpl',
+
   launch: function(){
-    console.log( 'calling step 1' );
+    console.log( 'launching step 1' );
+
     this.render();
     this.$el.parent().siblings().hide( 'fast' );
     this.$el.show();
   },
+
+  onRender: function(){
+    var template = TemplateCache.get( this.template );
+    var html = template();
+    this.$el.html( html );
+    return this;
+  }
 
 });

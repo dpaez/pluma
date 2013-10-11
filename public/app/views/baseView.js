@@ -29,7 +29,11 @@ PlumaApp.BaseView = Backbone.View.extend({
       data = this.serializeData();
     }
 
-    var renderedHTML = _.template(this.template, data);
+    // Deprecated
+    //var renderedHTML = _.template(this.template, data);
+
+    var template = TemplateCache.get( this.template );
+    var renderedHTML = template();
 
     this.$el.html(renderedHTML);
 

@@ -5,31 +5,38 @@
 PlumaApp.AppView = PlumaApp.ParentView.extend({
 
   el: '#app-container',
-  
+
   events: {
     'click .next-step': 'nextStep',
-    'click .prev-step': 'prevStep'  
+    'click .prev-step': 'prevStep'
+  },
+
+  firstStep: function(){
+    PlumaApp.steps[ 0 ].launch();
   },
 
   nextStep: function(){
-    console.log('Calling next step');
-    if ( PlumaApp.currentPos >= PlumaApp.steps.length ){ return; }
+    var nextStep = PlumaApp.currentPos + 1;
 
-    //this.remove();
-    PlumaApp.steps[PlumaApp.currentPos].remove();
+    if ( nextStep >= PlumaApp.steps.length ){ return; }
 
-    PlumaApp.steps[PlumaApp.currentPos++].launch();
+    PlumaApp.steps[ PlumaApp.currentPos ].remove();
 
+    PlumaApp.steps[ nextStep ].launch();
+
+    PlumaApp.currentPos = nextStep;
   },
 
   prevStep: function(){
-    console.log('Calling prev step');
-    if ( PlumaApp.currentPos <= PlumaApp.steps.length ){ return; }
+    var prevStep = PlumaApp.currentPos - 1;
 
-    //this.remove();
+    if ( prevStep < 0 ){ return; }
+
     PlumaApp.steps[PlumaApp.currentPos].remove();
-    
-    PlumaApp.steps[PlumaApp.currentPos--].launch();
+
+    PlumaApp.steps[ prevStep ].launch();
+
+    PlumaApp.currentPos = prevStep;
   }
 
 
