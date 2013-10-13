@@ -6,7 +6,7 @@
 
 PlumaApp.LeapView = PlumaApp.BaseView.extend({
 
-  el: '#gesture-sandbox',
+  id: 'gesture-sandbox',
 
   template: '#leap-trainer-tpl',
 
@@ -15,12 +15,16 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
     'click .stop-trainer': 'cancelNewGesture',
   },
 
-  // onRender: function(){
-  //   var template = TemplateCache.get( this.template );
-  //   var html = template();
-  //   this.$el.html( html );
-  //   return this;
-  // },
+  onRender: function(){
+    var template = TemplateCache.get( this.template );
+    var html = template();
+    this.$el.html( html );
+    return this;
+  },
+
+  onRemove: function(){
+    this.$el.empty();
+  },
 
   newGesture: function(){
     console.log( 'calling new gesture' );
@@ -31,6 +35,7 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
   cancelNewGesture: function(){
     console.log( 'calling stop gesture' );
   },
+
 
 
 });

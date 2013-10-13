@@ -9,9 +9,8 @@ PlumaApp.StepOneView = PlumaApp.ParentView.extend({
 
   launch: function(){
     console.log( 'launching step 1' );
-
     this.render();
-    this.$el.parent().siblings().hide( 'fast' );
+    $('.step').hide( 0 );
     this.$el.show();
   },
 

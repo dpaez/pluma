@@ -15,8 +15,8 @@ var PlumaAppMain = function( _, Backbone, $, PlumaApp ) {
     // Create App Views
     app = new PlumaApp.AppView();
     step1 = new PlumaApp.StepOneView();
-    leapView = new PlumaApp.LeapView();
-    step1.addChildView( leapView );
+    //leapView = new PlumaApp.LeapView();
+    step1.addChildView( PlumaApp.LeapView );
     // Not Implemented Yet
     step2 = new PlumaApp.StepTwoView();
     // Not Implemented Yet

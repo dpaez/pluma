@@ -5,27 +5,51 @@ PlumaApp.ParentView = PlumaApp.BaseView.extend({
 
     this.childViews = [];
 
-    this.listenTo( this, 'add:children', this.childrenAdded );
-
+    this.listenTo( this, 'parent:renderDone', this.renderChildViews );
   },
 
-  events: {},
+  render: function(){
+
+    if (this.onRender){
+      this.onRender();
+    } else {
+      // When parent views does not have a template
+      this.$el.empty();
+    }
+
+    this.trigger( 'parent:renderDone' );
+  },
+
+  appendChildViews: function(){
+    _.each( this.childViews, function( view ){
+      this.$el.append( view.$el );
+    }, this );
+  },
+
+  renderChildViews: function(){
+    _.each( this.childViews, function( View ){
+      var view = new View();
+      view.setElement( '#gesture-sandbox' );
+      view.delegateEvents();
+      this.$el.append( view.render().$el );
+    }, this );
+  },
 
   addChildView: function( view ){
-    if ( !(view instanceof Backbone.View) ) {
-      throw new Error( 'Child view must be a Backbone.View' );
-    }
+    // TODO: Check this check
+    // if ( !(view instanceof Backbone.View) ) {
+    //   throw new Error( 'Child view must be a Backbone.View' );
+    // }
     this.childViews.push( view );
-    this.trigger( 'add:children', view );
     return view;
   },
 
   // Removes any childViews associated with this view
   // by `addChildView`, which will in-turn remove any
   // children of those views, and so on.
-  removeChildViews: function(){
+  removeChildViews: function( options ){
     var children = this.childViews;
-    if ( !children ) return this;
+    if ( ( !children ) || ( children.length ) ){ return this; }
     for ( var i = 0, l = children.length; i<l; i++ ) {
       children[i].remove();
     }
@@ -33,47 +57,9 @@ PlumaApp.ParentView = PlumaApp.BaseView.extend({
     return this;
   },
 
-  // Extends the view's remove, by calling `removeChildViews`
-  // if any childViews exist.
   remove: function(){
-    PlumaApp.BaseView.prototype.remove.call(this);
+    //PlumaApp.BaseView.prototype.remove.call(this);
     if ( this.childViews ) this.removeChildViews();
   },
-
-  /**
-   * [childrenAdded render and append a new childView]
-   * @param  {[type]} childView [Backbone View]
-   */
-  childrenAdded: function( childView ){
-    var view = this.renderView( childView );
-    this.$el.append( view.$el );
-  },
-
-  renderView: function( view ){
-    view.render();
-    return view;
-  },
-
-  render: function(){
-
-    var html = [];
-
-    this.removeChildViews();
-
-    _.each(this.childViews, function( childView ){
-      var view = this.renderView( childView );
-      html.push( view.$el );
-    }, this );
-
-    if (this.onRender){
-      this.onRender();
-    }
-
-    //this.$el.html( html );
-
-
-    return this;
-
-  }
 
 });

@@ -35,11 +35,13 @@ PlumaApp.BaseView = Backbone.View.extend({
     var template = TemplateCache.get( this.template );
     var renderedHTML = template();
 
-    this.$el.html(renderedHTML);
+    this.$el.html( renderedHTML );
 
     if (this.onRender){
       this.onRender();
     }
-  }
 
+    return this;
+
+  }
 });
