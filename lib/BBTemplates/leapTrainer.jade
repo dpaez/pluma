@@ -1,6 +1,10 @@
 script(type='text/template', id='leap-trainer-tpl')
+  div.trainer-msg
+    p#trainer-feedback
+      | Esperando nuevo gesto...
+
   div.panel-small
     button(class='start-trainer', name='start-trainer')
       | New Gesture
     button(class='stop-trainer', name='stop-trainer')
-      | Cancel Gesture
+      | Reset Gesture
