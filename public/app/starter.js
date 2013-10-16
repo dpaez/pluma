@@ -7,7 +7,6 @@ var PlumaAppMain = function( _, Backbone, $, PlumaApp ) {
     step1,
     step2,
     step3,
-    leapView,
     router;
 
   function _start(){
@@ -15,10 +14,16 @@ var PlumaAppMain = function( _, Backbone, $, PlumaApp ) {
     // Create App Views
     app = new PlumaApp.AppView();
     step1 = new PlumaApp.StepOneView();
-    //leapView = new PlumaApp.LeapView();
-    step1.addChildView( PlumaApp.LeapView );
+    step1.addChildView( { 
+      view: PlumaApp.LeapView, 
+      options: {el: '#gesture-sandbox'} 
+    } );
     // Not Implemented Yet
     step2 = new PlumaApp.StepTwoView();
+    step2.addChildView( {
+      view: PlumaApp.DuinoView, 
+      options: {el: '#duino-sandbox'}
+    } );
     // Not Implemented Yet
     //step3 = new PlumaApp.StepThreeView();
 

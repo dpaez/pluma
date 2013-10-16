@@ -1,6 +1,6 @@
 {
   "name": "pluma",
-  "description": "A simple platform for hardware sketching." ,
+  "description": "A simple platform for hardware sketching.",
   "version": "0.0.1",
   "private": true,
   "dependencies": {

@@ -14,7 +14,7 @@ PlumaApp.LeapTrainer = function( _, Backbone, Leap, LeapTrainer ) {
     PlumaApp.trainer = new LeapTrainer.Controller({
       controller: PlumaApp.controller,
       trainingGestures: 2,
-      minGestureFrames: 10,
+      minGestureFrames: 8,
       hitThreshold: 0.48
     });
 

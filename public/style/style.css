@@ -2,9 +2,14 @@ body{font:100% "Lucida Grande",Helvetica,Arial,sans-serif;top:0;left:0;right:0;b
 a{color:#00b7ff}
 h1{font-size:3em}
 h2{font-size:2em;padding:0 .3125em}
-.step{width:95%;height:400px;margin-left:auto;margin-right:auto;border-width:1px;border-style:solid;border-color:#000}
+.step{width:95%;height:500px;margin-left:auto;margin-right:auto;border-width:1px;border-style:solid;border-color:#000}
 .footer{width:95%;height:100px;text-align:center;margin-left:auto;margin-right:auto;margin-top:50px}
-#gesture-sandbox{width:85%;height:200px;border-width:1px;border-style:solid;border-color:#f00;margin-left:auto;margin-right:auto;margin-top:50px}
-.panel-small{width:25%;margin-left:auto;margin-right:auto;margin-top:80px;border-top-width:2px;border-top-style:solid;border-top-color:#000}
+#gesture-sandbox,#duino-sandbox{width:85%;height:300px;border-width:1px;border-style:solid;border-color:#f00;margin-left:auto;margin-right:auto;margin-top:50px}
+.panel-small{width:25%;margin-left:auto;margin-right:auto;margin-top:50px;border-top-width:2px;border-top-style:solid;border-top-color:#000}
+.panel-small button{width:100%}
 .panel-small .stop-trainer{float:right}
 .trainer-msg{text-align:center;font-size:2em;color:#808080}
+.duino-board{float:right;width:30%;height:300px;padding:.8em .2em}
+.duino-components,.user-gestures{width:70%;height:150px;margin-top:10px;padding:.4em}
+.duino-comp,.user-gest{width:10%;height:40px;border-width:1px;border-style:solid;border-color:#000}
+.duino-status{width:15%;height:70px;border-width:2px;border-style:solid;border-color:#008000}

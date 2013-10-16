@@ -21,5 +21,4 @@ PlumaApp.StepTwoView = PlumaApp.ParentView.extend({
     return this;
   }
 
-
 });

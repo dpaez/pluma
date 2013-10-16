@@ -1,5 +1,7 @@
-(function( app ){
+(function( app, $ ){
+  
+  $( document ).ready( function(){
+    app.start();
+  });
 
-  app.start();
-
-}( PlumaAppMain ));
+}( PlumaAppMain, jQuery ));

@@ -27,21 +27,25 @@ PlumaApp.ParentView = PlumaApp.BaseView.extend({
   },
 
   renderChildViews: function(){
-    _.each( this.childViews, function( View ){
+    _.each( this.childViews, function( ViewObj ){
+      var View = ViewObj.view;
       var view = new View();
-      view.setElement( '#gesture-sandbox' );
+      if (ViewObj.options){
+        view.setElement( ViewObj.options.el );  
+      }
       view.delegateEvents();
       this.$el.append( view.render().$el );
     }, this );
   },
 
-  addChildView: function( view ){
+  addChildView: function( ViewObj ){
     // TODO: Check this check
     // if ( !(view instanceof Backbone.View) ) {
     //   throw new Error( 'Child view must be a Backbone.View' );
     // }
-    this.childViews.push( view );
-    return view;
+    if ( !(ViewObj) || !(ViewObj.view) ){ return; }
+    this.childViews.push( ViewObj );
+    return ViewObj;
   },
 
   // Removes any childViews associated with this view

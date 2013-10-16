@@ -19,7 +19,7 @@ h2
 
 .step
   width: 95%
-  height: 400px
+  height: 500px
   margin-left: auto
   margin-right: auto
   border-width: 1px
@@ -34,9 +34,13 @@ h2
   margin-right: auto
   margin-top: 50px
 
-#gesture-sandbox
+// ******************
+// Common steps style
+// ******************
+
+#gesture-sandbox, #duino-sandbox
   width: 85%
-  height: 200px
+  height: 300px
   border-width: 1px
   border-style: solid
   border-color: red
@@ -44,14 +48,21 @@ h2
   margin-right: auto
   margin-top: 50px
 
+// ******************
+// Step 1 (Leap)
+// ******************
+
 .panel-small
   width: 25%
   margin-left: auto
   margin-right: auto
-  margin-top: 80px
+  margin-top: 50px
   border-top-width: 2px
   border-top-style: solid
   border-top-color: black
+
+.panel-small button
+  width: 100%;
 
 .panel-small .stop-trainer
   float: right
@@ -60,6 +71,38 @@ h2
   text-align: center
   font-size: 2em
   color: gray
+
+// ******************
+// Step 2 (Duino)
+// ******************
+.duino-board
+  float: right
+  width: 30%
+  height: 300px
+  padding: 0.8em 0.2em
+
+.duino-components, .user-gestures
+  width: 70%
+  height: 150px
+  margin-top: 10px
+  padding: 0.4em
+
+.duino-comp, .user-gest
+  width: 10%
+  height: 40px
+  border-width: 1px
+  border-style: solid
+  border-color: black
+
+.duino-status
+  width: 15%
+  height: 70px
+  border-width: 2px
+  border-style: solid
+  border-color: green  
+
+
+
 
 
 
