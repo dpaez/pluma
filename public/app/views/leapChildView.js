@@ -22,6 +22,7 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
     this.listenTo( PlumaApp, 'plumaleap:training-started', this.trainingStarted );
     this.listenTo( PlumaApp, 'plumaleap:training-gest-recognized', this.trainingGestureRecognized );
     this.listenTo( PlumaApp, 'plumaleap:training-complete', this.trainingComplete );
+    this.listenTo( PlumaApp, 'plumaleap:training-countdown', this.trainingCountdown );
   },
 
   onRender: function(){
@@ -60,6 +61,11 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
 
   trainingGestureRecognized: function(){
     this.writeMsg( 'Gesto detectado, realicelo una vez mas por favor.' );
+  },
+
+  trainingCountdown: function( count ){
+    var msg = 'Grabando gesto en: ' + count;
+    this.writeMsg( msg );
   },
 
   trainingComplete: function( gestureName ){

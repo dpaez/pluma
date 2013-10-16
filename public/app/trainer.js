@@ -13,7 +13,9 @@ PlumaApp.LeapTrainer = function( _, Backbone, Leap, LeapTrainer ) {
     // Start leap trainer
     PlumaApp.trainer = new LeapTrainer.Controller({
       controller: PlumaApp.controller,
-      trainingGestures: 2
+      trainingGestures: 2,
+      minGestureFrames: 10,
+      hitThreshold: 0.48
     });
 
     // Specific module events
@@ -69,8 +71,8 @@ PlumaApp.LeapTrainer = function( _, Backbone, Leap, LeapTrainer ) {
   Leap Training section
    */
 
-  function _trainingCountdown(){
-
+  function _trainingCountdown( countdown ){
+    PlumaApp.trigger( 'plumaleap:training-countdown', countdown );
   };
 
   function _trainingStarted(gestureName){
