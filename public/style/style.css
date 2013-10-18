@@ -9,6 +9,7 @@ h2{font-size:2em;padding:0 .3125em}
 .panel-small button{width:100%}
 .panel-small .stop-trainer{float:right}
 .trainer-msg{text-align:center;font-size:2em;color:#808080}
+.leap-msg{text-align:center;font-size:.7em;color:#008000}
 .duino-board{float:right;width:30%;height:300px;padding:.8em .2em}
 .duino-components,.user-gestures{width:70%;height:150px;margin-top:10px;padding:.4em}
 .duino-comp,.user-gest{width:10%;height:40px;border-width:1px;border-style:solid;border-color:#000}

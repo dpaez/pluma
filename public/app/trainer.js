@@ -14,8 +14,8 @@ PlumaApp.LeapTrainer = function( _, Backbone, Leap, LeapTrainer ) {
     PlumaApp.trainer = new LeapTrainer.Controller({
       controller: PlumaApp.controller,
       trainingGestures: 2,
-      minGestureFrames: 8,
-      hitThreshold: 0.48
+      minGestureFrames: 6,
+      hitThreshold: 0.38
     });
 
     // Specific module events
@@ -92,6 +92,7 @@ PlumaApp.LeapTrainer = function( _, Backbone, Leap, LeapTrainer ) {
 
   function _gestureRecognized(hit, gestureName){
     console.log('Gesture recognized: %s with confidence: %d', gestureName, hit);
+    PlumaApp.trigger( 'plumaleap:gesture-recognized', {name: gestureName, hit: hit} );
   };
 
   // Public API
