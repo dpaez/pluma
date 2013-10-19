@@ -11,14 +11,15 @@ PlumaApp.DuinoView = PlumaApp.BaseView.extend({
   template: '#duino-gestures-tpl',
 
   events: {
-
+    'click .component-button' : 'enableComponent'
   },
-  
+
   initialize: function(){
+    // Pluma socket events
     PlumaApp.socket = io.connect('http://localhost:8080');
     PlumaApp.socket.emit( 'plumaduino:board_status' );
-    PlumaApp.socket.on( 'plumaduino:board_ready', this.boardReady );
-    PlumaApp.socket.on( 'plumaduino:component_ready', this.compReady );
+    PlumaApp.socket.on( 'plumaduino:board_ready', _.bind(this.boardReady, this) );
+    PlumaApp.socket.on( 'plumaduino:component_ready', _.bind(this.componentReady, this) );
   },
 
   onRender: function(){
@@ -34,14 +35,57 @@ PlumaApp.DuinoView = PlumaApp.BaseView.extend({
 
   boardReady: function(){
     console.log( 'Arduino UNO is ready' );
+    // make arduino status an object constant property
+    this.updateBoard( 'enabled' );
     PlumaApp.socket.emit( 'plumaduino:board_setup', {} );
-    PlumaApp.socket.emit( 'plumaduino:create_component', 'lcd' );
   },
 
-  compReady: function(){
+  componentReady: function( data ){
     console.log( 'Arduino component is ready' );
-    PlumaApp.socket.emit( 'plumaduino:execute_default' );
+    // PlumaApp.socket.emit( 'plumaduino:execute_default' );
+    this.updateComponent( data.componentType, 'enabled' );
+  },
 
+  updateBoard: function( status ){
+    var $board = this.$( '.duino-status' );
+
+    switch ( status ){
+      case 'enabled':
+        $board.css({'background-color': 'green'});
+        break;
+
+      case 'disabled':
+        $board.css({'background-color': 'red'});
+        break;
+
+      default:
+        break;
+    }
+  },
+
+  updateComponent: function( id, status ){
+    var datatype = "[data-type='" + id + "']";
+    var $component = this.$( '.component-button' + datatype );
+
+    switch ( status ){
+      case 'enabled':
+        $component.css({'background-color': 'black'});
+        break;
+
+      case 'disabled':
+        $component.css({'background-color': 'red'});
+        break;
+
+      default:
+        break;
+    }
+  },
+
+  enableComponent: function( e ){
+    e.preventDefault();
+    var $component = $( e.currentTarget );
+    var componentType = $component.data('type');
+    PlumaApp.socket.emit( 'plumaduino:create_component', componentType );
   }
 
 });

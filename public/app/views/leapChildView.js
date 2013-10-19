@@ -11,8 +11,8 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
   template: '#leap-trainer-tpl',
 
   events: {
-    'click .start-trainer': 'newGesture',
-    'click .stop-trainer': 'cancelNewGesture',
+    'click .start-trainer':   'newGesture',
+    'click .stop-trainer':    'cancelNewGesture',
   },
 
   initialize: function(){
@@ -53,7 +53,7 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
     console.log( 'calling new gesture' );
     //trigger (leaptrainer) create event
     PlumaApp.trigger( 'plumaleap:create', 'testGesture' );
-
+    this.cleanUI();
   },
 
   trainingStarted: function(){
@@ -79,7 +79,8 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
   },
 
   gestureRecognized: function( gestData ){
-    var msg = 'Gesto:' + gestData.name + ' detectado con confianza: ' + gestData.hit;
+    var hit = Math.min(parseInt(100 * gestData.hit), 100);
+    var msg = 'Gesto:' + gestData.name + ' detectado con confianza: ' + hit;
     this.writeInfo( msg );
   },
 
@@ -94,7 +95,12 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
   cancelNewGesture: function(){
     console.log( 'calling reset gesture' );
     PlumaApp.trigger( 'plumaleap:reset', 'testGesture' );
+      this.cleanUI();
   },
+
+  cleanUI: function(){
+    this.$( '#leap-feedback' ).text('');
+  }
 
 
 

@@ -3,7 +3,22 @@ script(type='text/template', id='duino-gestures-tpl')
     div.duino-status
 
   div.duino-components
+    p
+      | Componentes Arduino
     div.duino-comp
+      span
+        | LCD
+      button(class='component-button', name='lcd-button', data-type='lcd')
+        | Activar
+
+    div.duino-comp
+      span
+        | Motor
+
+      button(class='component-button', name='motor-button', data-type='motor')
+        | Activar
+
+
 
   div.user-gestures
     div.user-gest

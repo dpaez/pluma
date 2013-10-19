@@ -7,16 +7,36 @@ PlumaApp.controller = {};
 
 PlumaApp.LeapTrainer = function( _, Backbone, Leap, LeapTrainer ) {
 
+  function _modifyController(replacementController) {
+
+    replacementController = LeapTrainer[replacementController];
+    var fields = replacementController.overidden;
+    var func;
+
+    for (var field in fields) {
+      func = replacementController.prototype[field];
+      if (func) {
+        if (func.bind) { func.bind(PlumaApp.trainer); }
+        PlumaApp.trainer[field] = func;
+      }
+    }
+  };
+
   function _init(){
     // New Leap controller instance
     PlumaApp.controller = new Leap.Controller();
     // Start leap trainer
     PlumaApp.trainer = new LeapTrainer.Controller({
       controller: PlumaApp.controller,
-      trainingGestures: 2,
+      minRecordingVelocity: 500,
+      trainingGestures: 1,
       minGestureFrames: 6,
-      hitThreshold: 0.38
+      hitThreshold: 0.25,
+      downtime: 1000,
     });
+
+    _modifyController( 'HRController' );
+    _modifyController( 'CorrelationController' );
 
     // Specific module events
     PlumaApp.on({
