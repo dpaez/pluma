@@ -71,7 +71,7 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
 
   trainingComplete: function( gestureName ){
     this.writeMsg( 'Gesto aprendido!' );
-    var that = this;
+    PlumaApp.GesturesDB.save( {'gesture': gestureName } );
     setTimeout(function(){
         that.writeMsg('Pruebe el gesto...');
       }, 2000
@@ -95,7 +95,7 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
   cancelNewGesture: function(){
     console.log( 'calling reset gesture' );
     PlumaApp.trigger( 'plumaleap:reset', 'testGesture' );
-      this.cleanUI();
+    this.cleanUI();
   },
 
   cleanUI: function(){

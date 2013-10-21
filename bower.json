@@ -24,6 +24,7 @@
     "backbone": "~1.0.0",
     "underscore": "latest",
     "jquery": "latest",
-    "leapjs": "~0.2.1"
+    "leapjs": "~0.2.1",
+    "lawnchair": "latest"
   }
 }

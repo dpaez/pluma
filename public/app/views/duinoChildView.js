@@ -1,5 +1,5 @@
 /**
- * Child View: Duino Gestures
+ * Child View: Arduino
  * Deps: Underscore, Backbone, johnny-five, socket.io
  */
 'use strict';
@@ -8,7 +8,7 @@ PlumaApp.DuinoView = PlumaApp.BaseView.extend({
 
   //id: 'duino-sandbox',
 
-  template: '#duino-gestures-tpl',
+  template: '#duino-tpl',
 
   events: {
     'click .component-button' : 'enableComponent'
@@ -84,7 +84,7 @@ PlumaApp.DuinoView = PlumaApp.BaseView.extend({
   enableComponent: function( e ){
     e.preventDefault();
     var $component = $( e.currentTarget );
-    var componentType = $component.data('type');
+    var componentType = $component.data( 'type' );
     PlumaApp.socket.emit( 'plumaduino:create_component', componentType );
   }
 

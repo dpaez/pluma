@@ -1,7 +1,7 @@
 /**
  * Pluma App igniter module
  */
-var PlumaAppMain = function( _, Backbone, $, PlumaApp ) {
+var PlumaAppMain = function( _, Backbone, $, Lawnchair, PlumaApp ) {
 
   var app,
     step1,
@@ -11,19 +11,22 @@ var PlumaAppMain = function( _, Backbone, $, PlumaApp ) {
 
   function _start(){
 
+    // Create local lawnchair
+    PlumaApp.GesturesDB = new Lawnchair( {name: 'GesturesDB'}, function(){} ); 
+
     // Create App Views
     app = new PlumaApp.AppView();
     step1 = new PlumaApp.StepOneView();
-    step1.addChildView( { 
+    step1.addChildView({ 
       view: PlumaApp.LeapView, 
       options: {el: '#gesture-sandbox'} 
-    } );
+    });
     // Not Implemented Yet
     step2 = new PlumaApp.StepTwoView();
-    step2.addChildView( {
+    step2.addChildView({
       view: PlumaApp.DuinoView, 
       options: {el: '#duino-sandbox'}
-    } );
+    });
     // Not Implemented Yet
     //step3 = new PlumaApp.StepThreeView();
 
@@ -62,4 +65,4 @@ var PlumaAppMain = function( _, Backbone, $, PlumaApp ) {
     start: publicStart
   };
 
-}( _, Backbone, jQuery, PlumaApp );
+}( _, Backbone, jQuery, Lawnchair, PlumaApp );
