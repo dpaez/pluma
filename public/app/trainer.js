@@ -50,6 +50,7 @@ PlumaApp.LeapTrainer = function( _, Backbone, Leap, LeapTrainer ) {
     PlumaApp.trainer.on( 'training-complete', _trainingComplete );
     PlumaApp.trainer.on( 'training-countdown', _trainingCountdown );
     PlumaApp.trainer.on( 'gesture-recognized', _gestureRecognized );
+    PlumaApp.trainer.on( 'gesture-unknown', _gestureUnknown );
     // Leap Controller Events
     PlumaApp.controller.on( 'connect', _leapConnected );
     PlumaApp.controller.on( 'deviceDisconnected', _leapDisconnected );
@@ -95,24 +96,28 @@ PlumaApp.LeapTrainer = function( _, Backbone, Leap, LeapTrainer ) {
     PlumaApp.trigger( 'plumaleap:training-countdown', countdown );
   };
 
-  function _trainingStarted(gestureName){
+  function _trainingStarted( gestureName ){
     console.log('Training new gesture: ', gestureName);
     PlumaApp.trigger( 'plumaleap:training-started' );
   };
 
-  function _trainingGestureRecognized(gestureName, trainingGestures){
-    var remaining = (trainingGestures - trainingGestures.length);
+  function _trainingGestureRecognized( gestureName, trainingGestures ){
+    var remaining = ( trainingGestures - trainingGestures.length );
     PlumaApp.trigger( 'plumaleap:training-gest-recognized' );
   };
 
-  function _trainingComplete(gestureName, trainingGestures){
+  function _trainingComplete( gestureName, trainingGestures ){
     console.log( 'Training gesture complete for: ', gestureName );
     PlumaApp.trigger( 'plumaleap:training-complete', gestureName );
   };
 
-  function _gestureRecognized(hit, gestureName){
+  function _gestureRecognized( hit, gestureName ){
     console.log('Gesture recognized: %s with confidence: %d', gestureName, hit);
     PlumaApp.trigger( 'plumaleap:gesture-recognized', {name: gestureName, hit: hit} );
+  };
+
+  function _gestureUnknown( bestHit, closestGestureName ){
+    PlumaApp.trigger( 'plumaleap:gesture-unknown', { name: closestGestureName, hit: bestHit } );
   };
 
   // Public API

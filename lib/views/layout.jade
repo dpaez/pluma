@@ -18,11 +18,14 @@ html
     include ../BBTemplates/leapContainer
     include ../BBTemplates/duinoConfig
     include ../BBTemplates/duinoContainer
+    include ../BBTemplates/leapduinoContainer
     include ../BBTemplates/leapDuino
+    include ../BBTemplates/testerContainer
+    include ../BBTemplates/sandbox
 
     // Vendor Scripts
     script(src='/vendor/jquery/jquery.min.js')
-    script(src='/vendor/lawnchair/src/Lawnchair.js')
+    script(src='/vendor/lawnchair/lib/lawnchair.js')
     script(src='/vendor/underscore/underscore.js')
     script(src='/vendor/backbone/backbone.js')
     script(src="http://localhost:8080/socket.io/socket.io.js")
@@ -38,8 +41,12 @@ html
     script(src='/app/views/appView.js')
     script(src='/app/views/step1.js')
     script(src='/app/views/step2.js')
+    script(src='/app/views/step3.js')
+    script(src='/app/views/step4.js')
     script(src='/app/views/leapChildView.js')
     script(src='/app/views/duinoChildView.js')
+    script(src='/app/views/leapduinoChildView.js')
+    script(src='/app/views/sandboxChildView.js')
     script(src='/app/router/router.js')
     script(src='/app/trainer.js')
     script(src='/app/starter.js')

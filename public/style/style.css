@@ -9,10 +9,14 @@ h2{font-size:2em;padding:0 .3125em}
 .panel-small button{width:100%}
 .panel-small .stop-trainer{float:right}
 .trainer-msg{text-align:center;font-size:2em;color:#808080}
-.leap-msg{text-align:center;font-size:.7em;color:#008000}
+.leap-msg{text-align:center;font-size:.7em;font-weight:bold;color:#008000}
+.leap-msg > .warning{color:#ffa500}
 .duino-board{float:right;width:30%;height:300px;padding:.8em .2em}
 .duino-components,.user-gestures{width:70%;height:150px;margin-top:10px;padding:.4em}
 .duino-comp,.user-gest{width:14%;height:40px;border-width:1px;border-style:solid;border-color:#000;font-size:.8em;margin-top:.5em}
 .duino-comp p{text-align:left;display:inline-block;margin:0;padding:.2em;vertical-align:top;zoom:1;*display:inline;}
 .duino-comp button{text-align:center;float:right}
 .duino-status{width:15%;height:70px;border-width:2px;border-style:solid;border-color:#008000}
+.duino-comp.over{border-color:#00f}
+.fullscreen{width:95%;margin-left:auto;margin-right:auto;height:300px;border-width:5px;border-style:solid;border-color:#ff0}
+.fullscreen:before{position:absolute;display:block;content:'';box-sizing:border-box;margin-top:-4px;margin-left:-4px;width:90.7%;height:309px;border-width:5px;border-style:dashed;border-color:#000}

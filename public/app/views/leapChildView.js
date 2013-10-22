@@ -24,6 +24,7 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
     this.listenTo( PlumaApp, 'plumaleap:training-complete', this.trainingComplete );
     this.listenTo( PlumaApp, 'plumaleap:training-countdown', this.trainingCountdown );
     this.listenTo( PlumaApp, 'plumaleap:gesture-recognized', this.gestureRecognized );
+    this.listenTo( PlumaApp, 'plumaleap:gesture-unknown', this.gestureUnknown );
   },
 
   onRender: function(){
@@ -70,8 +71,17 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
   },
 
   trainingComplete: function( gestureName ){
+    var that = this;
     this.writeMsg( 'Gesto aprendido!' );
-    PlumaApp.GesturesDB.save( {'gesture': gestureName } );
+
+    // PlumaApp.GesturesDB.exists( 'gesture', function( result ){
+    //   if ( !result ){
+    //     PlumaApp.GesturesDB.save( {key: 'gesture', data: gestureName } );
+    //   }
+    // });
+
+    PlumaApp.GesturesDB.save( {key: 'gesture', data: gestureName } );
+
     setTimeout(function(){
         that.writeMsg('Pruebe el gesto...');
       }, 2000
@@ -84,12 +94,20 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
     this.writeInfo( msg );
   },
 
+  gestureUnknown: function( gestData ){
+    this.writeWarning( 'Gesto desconocido detectado.' );
+  },
+
   writeMsg: function( msg ){
     this.$( '#trainer-feedback' ).text( msg );
   },
 
   writeInfo: function( msg ){
-    this.$( '#leap-feedback' ).text( msg );
+    this.$( '#leap-feedback' ).removeClass().text( msg );
+  },
+
+  writeWarning: function( msg ){
+    this.$( '#leap-feedback' ).addClass( 'warning' ).text( msg );
   },
 
   cancelNewGesture: function(){
