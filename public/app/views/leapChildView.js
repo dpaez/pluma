@@ -25,6 +25,7 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
     this.listenTo( PlumaApp, 'plumaleap:training-countdown', this.trainingCountdown );
     this.listenTo( PlumaApp, 'plumaleap:gesture-recognized', this.gestureRecognized );
     this.listenTo( PlumaApp, 'plumaleap:gesture-unknown', this.gestureUnknown );
+    PlumaApp.isTraining = false;
   },
 
   onRender: function(){
@@ -59,6 +60,7 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
 
   trainingStarted: function(){
     this.writeMsg( 'Grabando gesto...' );
+    PlumaApp.isTraining = true;
   },
 
   trainingGestureRecognized: function(){
@@ -81,7 +83,7 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
     // });
 
     PlumaApp.GesturesDB.save( {key: 'gesture', data: gestureName } );
-
+    PlumaApp.isTraining = false;
     setTimeout(function(){
         that.writeMsg('Pruebe el gesto...');
       }, 2000
@@ -89,12 +91,14 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
   },
 
   gestureRecognized: function( gestData ){
+    
     var hit = Math.min(parseInt(100 * gestData.hit), 100);
     var msg = 'Gesto:' + gestData.name + ' detectado con confianza: ' + hit;
     this.writeInfo( msg );
   },
 
   gestureUnknown: function( gestData ){
+    if ( PlumaApp.isTraining ) { return; }
     this.writeWarning( 'Gesto desconocido detectado.' );
   },
 
@@ -103,11 +107,11 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
   },
 
   writeInfo: function( msg ){
-    this.$( '#leap-feedback' ).removeClass().text( msg );
+    this.$( '#leap-feedback' ).removeClass().text( msg ).fadeIn( 'fast' ).fadeOut( 3000 );
   },
 
   writeWarning: function( msg ){
-    this.$( '#leap-feedback' ).addClass( 'warning' ).text( msg );
+    this.$( '#leap-feedback' ).addClass( 'warning' ).text( msg ).fadeIn( 'fast' ).fadeOut( 3000 );
   },
 
   cancelNewGesture: function(){

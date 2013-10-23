@@ -65,6 +65,13 @@ PlumaApp.LeapDuinoView = PlumaApp.BaseView.extend({
         params: 'BOOM!'
       } );
     });
+    $comp.addClass( 'linked' ); 
+    var targetDrag = '#' + gestureName;
+    $( targetDrag ).addClass( 'linked ');
+    setTimeout(function(){
+      $comp.removeClass( 'linked' );
+      $( targetDrag ).removeClass( 'linked' );
+    }, 2000);
     console.log( 'Binding gesture with component: done.' );
     return false;
   }

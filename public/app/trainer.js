@@ -31,7 +31,7 @@ PlumaApp.LeapTrainer = function( _, Backbone, Leap, LeapTrainer ) {
       minRecordingVelocity: 500,
       trainingGestures: 1,
       minGestureFrames: 6,
-      hitThreshold: 0.25,
+      hitThreshold: 0.65,
       downtime: 1000,
     });
 
