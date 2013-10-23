@@ -85,7 +85,30 @@ PlumaApp.DuinoView = PlumaApp.BaseView.extend({
     e.preventDefault();
     var $component = $( e.currentTarget );
     var componentType = $component.data( 'type' );
-    PlumaApp.socket.emit( 'plumaduino:create_component', componentType );
+    var options = {};
+    switch( componentType ){
+      case 'lcd':
+        options = {
+          pins: [ 8, 9, 4, 5, 6, 7 ],
+          rows: 2,
+          cols: 16,
+        };
+        break;
+      case 'servo':
+        options = {
+          pin: 5
+        };
+        break;
+      default:
+        break;
+    }
+
+    var data = {
+      type: componentType,
+      options : options
+    };
+    
+    PlumaApp.socket.emit( 'plumaduino:create_component', data );
   }
 
 });
