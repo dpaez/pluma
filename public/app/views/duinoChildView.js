@@ -20,6 +20,7 @@ PlumaApp.DuinoView = PlumaApp.BaseView.extend({
     PlumaApp.socket.emit( 'plumaduino:board_status' );
     PlumaApp.socket.on( 'plumaduino:board_ready', _.bind(this.boardReady, this) );
     PlumaApp.socket.on( 'plumaduino:component_ready', _.bind(this.componentReady, this) );
+    PlumaApp.socket.on( 'plumaduino:components_attached', _.bind(this.attachComponents, this) );
   },
 
   onRender: function(){
@@ -37,12 +38,17 @@ PlumaApp.DuinoView = PlumaApp.BaseView.extend({
     console.log( 'Arduino UNO is ready' );
     // make arduino status an object constant property
     this.updateBoard( 'enabled' );
-    PlumaApp.socket.emit( 'plumaduino:board_setup', {} );
+  },
+
+  attachComponents: function( components ){
+    _.each(components, function( component ) {
+      var view = new PlumaApp.ComponentView( { component: component } );
+      this.$( '.duino-components' ).append( view.render().$el );
+    });
   },
 
   componentReady: function( data ){
-    console.log( 'Arduino component is ready' );
-    // PlumaApp.socket.emit( 'plumaduino:execute_default' );
+    console.log( 'Arduino component: %s is ready', data.componentType );
     this.updateComponent( data.componentType, 'enabled' );
   },
 
@@ -86,6 +92,7 @@ PlumaApp.DuinoView = PlumaApp.BaseView.extend({
     var $component = $( e.currentTarget );
     var componentType = $component.data( 'type' );
     var options = {};
+    // TODO: these options objects should be created by the user...
     switch( componentType ){
       case 'lcd':
         options = {
@@ -96,7 +103,7 @@ PlumaApp.DuinoView = PlumaApp.BaseView.extend({
         break;
       case 'servo':
         options = {
-          pin: 5
+          pin: 14 // A0, when using it with a shield
         };
         break;
       default:
@@ -107,7 +114,7 @@ PlumaApp.DuinoView = PlumaApp.BaseView.extend({
       type: componentType,
       options : options
     };
-    
+
     PlumaApp.socket.emit( 'plumaduino:create_component', data );
   }
 

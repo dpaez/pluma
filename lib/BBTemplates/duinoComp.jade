@@ -1,0 +1,6 @@
+script(type='text/template', id='duino-comp-tpl')
+  div.duino-comp
+    span
+      | <%= type %>
+    button(class='component-button', name='<%- type %>-button', data-type='<%- type %>')
+      | Activar

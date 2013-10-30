@@ -2,7 +2,7 @@
 
 var PlumaApp = PlumaApp || {};
 
-_.extend(PlumaApp, Backbone.Events);
+_.extend( PlumaApp, Backbone.Events );
 
 PlumaApp.BaseView = Backbone.View.extend({
 
