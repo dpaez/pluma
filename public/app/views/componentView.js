@@ -2,6 +2,7 @@
 PlumaApp.ComponentView = PlumaApp.BaseView.extend({
 
   template: '#duino-comp-tpl',
+  className: 'duino-comp',
 
   events: {
     'click .component-button' : 'enableComponent'
@@ -12,8 +13,8 @@ PlumaApp.ComponentView = PlumaApp.BaseView.extend({
   },
 
   onRender: function(){
-    var template = TemplateCache.get( this.template, this.component );
-    var html = template();
+    var template = TemplateCache.get( this.template );
+    var html = template( this.component );
     this.$el.html( html );
     return this;
   },
@@ -38,7 +39,7 @@ PlumaApp.ComponentView = PlumaApp.BaseView.extend({
         break;
       case 'servo':
         options = {
-          pin: 14 // A0, when using it with a shield
+          pin: 'A0' // A0, when using it with a shield
         };
         break;
       default:

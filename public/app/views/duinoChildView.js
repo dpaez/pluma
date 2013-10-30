@@ -41,9 +41,10 @@ PlumaApp.DuinoView = PlumaApp.BaseView.extend({
   },
 
   attachComponents: function( components ){
+    var $duinoComponents = this.$( '.duino-components' );
     _.each(components, function( component ) {
       var view = new PlumaApp.ComponentView( { component: component } );
-      this.$( '.duino-components' ).append( view.render().$el );
+      $duinoComponents.append( view.render().$el );
     });
   },
 
