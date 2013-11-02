@@ -5,11 +5,13 @@ PlumaApp.ComponentView = PlumaApp.BaseView.extend({
   className: 'duino-comp',
 
   events: {
-    'click .component-button' : 'enableComponent'
+    'click .component-setup' : 'setupComponent',
+    'click .component-activate' : 'enableComponent'
   },
 
   initialize: function( options ){
     this.component = options.component;
+    this.modalView = new PlumaApp.ComponentSetupView({ component: this.component });
   },
 
   onRender: function(){
@@ -23,33 +25,42 @@ PlumaApp.ComponentView = PlumaApp.BaseView.extend({
     this.$el.empty();
   },
 
+  setupComponent: function( e ){
+    e.preventDefault();
+    e.stopPropagation();
+    this.modalView.render().showModal();
+
+  },
+
   enableComponent: function( e ){
     e.preventDefault();
     var $component = $( e.currentTarget );
     var componentType = $component.data( 'type' );
     var options = {};
-    // TODO: these options objects should be created by the user...
-    switch( componentType ){
-      case 'lcd':
-        options = {
-          pins: [ 8, 9, 4, 5, 6, 7 ],
-          rows: 2,
-          cols: 16,
-        };
-        break;
-      case 'servo':
-        options = {
-          pin: 'A0' // A0, when using it with a shield
-        };
-        break;
-      default:
-        break;
-    }
 
-    var data = {
-      type: componentType,
-      options : options
-    };
+    // DEPRECATED
+    // switch( componentType ){
+    //   case 'lcd':
+    //     options = {
+    //       pins: [ 8, 9, 4, 5, 6, 7 ],
+    //       rows: 2,
+    //       cols: 16,
+    //     };
+    //     break;
+    //   case 'servo':
+    //     options = {
+    //       pin: '9' // A0, when using it with a shield
+    //     };
+    //     break;
+    //   default:
+    //     break;
+    // }
+    var dbkey = 'config_' + componentType;
+    var data = {};
+    PlumaApp.GesturesDB.get(dbkey, function( result ){
+      data.type = componentType;
+      data.options = result.data.options;
+    });
 
     PlumaApp.socket.emit( 'plumaduino:create_component', data );
   }

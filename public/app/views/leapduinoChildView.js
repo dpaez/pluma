@@ -56,16 +56,22 @@ PlumaApp.LeapDuinoView = PlumaApp.BaseView.extend({
     var $comp = $( e.currentTarget );
     $comp.removeClass( 'over' );
     var gestureName = e.originalEvent.dataTransfer.getData( 'string:text/plain' );
-    var action = 'default-action';
+    var componentType = $comp.attr( 'id' );
+    var action = 'defaultAction';
+    var params;
+    var dbkey = 'config_' + componentType;
+    PlumaApp.GesturesDB.get(dbkey, function( result ){
+      params = result.data.params;
+    });
     PlumaApp.trainer.on( gestureName, function(){
       console.log( 'gesture-component binding triggered' );
       PlumaApp.socket.emit( 'plumaduino:component_do', {
-        type: $comp.attr( 'id' ),
+        type: componentType,
         action: action,
-        params: 'BOOM!'
+        params: params
       } );
     });
-    $comp.addClass( 'linked' ); 
+    $comp.addClass( 'linked' );
     var targetDrag = '#' + gestureName;
     $( targetDrag ).addClass( 'linked ');
     setTimeout(function(){

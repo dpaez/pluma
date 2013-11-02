@@ -1,0 +1,19 @@
+script(type='text/template', id='duino-comp-setup-tpl')
+  div.comp-config
+    h3
+      <%= componentType %> config
+    form
+      div.options
+        p Options
+        div.hashitem
+          input(class='key', type='text', placeholder='key')
+          input(class='value', type='text', placeholder='value')
+        button(id='addKeyVal', type='button')
+          |  Add key/val
+
+      div.actions
+        p Actions parameters
+        input(id='params', type='text')
+
+      button(id='confirm-setup', value='done')
+        |  Done
