@@ -122,6 +122,15 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
 
   cleanUI: function(){
     this.$( '#leap-feedback' ).text('');
+  },
+
+  addGestures: function(){
+    var $userGestures = this.$( '.user-gestures' );
+    var tpl = _.template('<div id="<%= gestID %>", class="user-gest"> <p> <%= gestName %> </p> </div>');
+    $userGestures.empty();
+    PlumaApp.GesturesDB.get('gesture', function( result ){
+      $userGestures.append( tpl({ gestID: result.data, gestName: result.data }) );
+    });
   }
 
 
