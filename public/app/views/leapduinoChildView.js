@@ -15,6 +15,8 @@ PlumaApp.LeapDuinoView = PlumaApp.BaseView.extend({
 
   initialize: function(){
     this.listenTo( this, 'render', this.addGestures );
+    this.listenTo( this, 'render', this.attachComponents );
+    this.listenTo( this, 'render', this.cleanGesturesBindings );
   },
 
   onRender: function(){
@@ -29,19 +31,43 @@ PlumaApp.LeapDuinoView = PlumaApp.BaseView.extend({
     this.$el.empty();
   },
 
+  cleanGesturesBindings: function(){
+    PlumaApp.Storage.each(function( result ){
+      if ( (result) && (result.type !== PlumaApp.TYPES['GESTURE']) ){ return; }
+      PlumaApp.trainer.off( result.data.name );
+    });
+  },
+
   addGestures: function(){
     var $userGestures = this.$( '.user-gestures' );
-    var tpl = _.template('<div id="<%= gestID %>", class="user-gest", draggable=true> <p> <%= gestName %> </p> </div>');
+    var tpl = _.template('<div data-event="<%= gestName %>", class="user-gest", draggable=true> <p> <%= gestName %> </p> </div>');
     $userGestures.empty();
-    PlumaApp.GesturesDB.get('gesture', function( result ){
-      $userGestures.append( tpl({ gestID: result.data, gestName: result.data }) );
+    PlumaApp.Storage.each(function( result ){
+      if ( (result) && (result.type !== PlumaApp.TYPES['GESTURE']) ){ return; }
+      $userGestures.append( tpl({ gestName: result.data.name }) );
+    });
+  },
+
+  attachComponents: function(){
+    var $duinoComponents = this.$( '.duino-components' );
+
+    var tpl = _.template('<div class="duino-comp", data-id="<%= componentID %>", data-type="<%= componentType %>", dropzone="link string:text/plain"><span><%= componentName %></span></div>');
+
+    PlumaApp.Storage.each(function( result, idx ){
+      if ( (result) && (result.type !== PlumaApp.TYPES['COMPONENT']) ){ return; }
+
+      $duinoComponents.append( tpl({
+        componentID: PlumaApp.KEYS['COMPONENT']( result.data.options ),
+        componentType: result.componentType,
+        componentName: result.componentType.toUpperCase(),
+      }) );
     });
   },
 
   dragStartGesture: function( e ){
-    var $comp = $( e.currentTarget );
+    var $gesture = $( e.currentTarget );
     e.originalEvent.dataTransfer.effectAllowed = 'link';
-    e.originalEvent.dataTransfer.setData( 'string:text/plain', $comp.attr('id') );
+    e.originalEvent.dataTransfer.setData( 'string:text/plain', $gesture.data('event') );
   },
 
   dragOverComp: function( e ){
@@ -56,27 +82,33 @@ PlumaApp.LeapDuinoView = PlumaApp.BaseView.extend({
     var $comp = $( e.currentTarget );
     $comp.removeClass( 'over' );
     var gestureName = e.originalEvent.dataTransfer.getData( 'string:text/plain' );
-    var componentType = $comp.attr( 'id' );
+    var componentID = $comp.data( 'id' );
+    var componentType = $comp.data( 'type' );
     var action = 'defaultAction';
     var params;
-    var dbkey = 'config_' + componentType;
-    PlumaApp.GesturesDB.get(dbkey, function( result ){
+
+    PlumaApp.Storage.get(componentID, function( result ){
       params = result.data.params;
     });
+
     PlumaApp.trainer.on( gestureName, function(){
       console.log( 'gesture-component binding triggered' );
       PlumaApp.socket.emit( 'plumaduino:component_do', {
-        type: componentType,
+        componentID: componentID,
+        componentType: componentType,
         action: action,
         params: params
       } );
     });
     $comp.addClass( 'linked' );
-    var targetDrag = '#' + gestureName;
-    $( targetDrag ).addClass( 'linked ');
+
+    var $targetDrag = this.$el.find("[data-event='" + gestureName + "']");
+
+    $targetDrag.addClass( 'linked ');
+
     setTimeout(function(){
       $comp.removeClass( 'linked' );
-      $( targetDrag ).removeClass( 'linked' );
+      $targetDrag.removeClass( 'linked' );
     }, 2000);
     console.log( 'Binding gesture with component: done.' );
     return false;

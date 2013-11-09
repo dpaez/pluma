@@ -20,6 +20,7 @@ html
     include ../BBTemplates/duinoCompSetup
     include ../BBTemplates/duinoConfig
     include ../BBTemplates/duinoContainer
+    include ../BBTemplates/leapGestureCreation
     include ../BBTemplates/leapduinoContainer
     include ../BBTemplates/leapDuino
     include ../BBTemplates/testerContainer
@@ -29,6 +30,7 @@ html
     script(src='/vendor/jquery/jquery.min.js')
     script(src='/vendor/lawnchair/lib/lawnchair.js')
     script(src='/vendor/underscore/underscore.js')
+    script(src='/vendor/lzwCompress.js')
     script(src='/vendor/backbone/backbone.js')
     script(src='/vendor/Backbone.ModalDialog.js')
     script(src="http://localhost:8080/socket.io/socket.io.js")
@@ -47,6 +49,7 @@ html
     script(src='/app/views/step3.js')
     script(src='/app/views/step4.js')
     script(src='/app/views/leapChildView.js')
+    script(src='/app/views/gestureCreationView.js')
     script(src='/app/views/componentView.js')
     script(src='/app/views/componentConfigView.js')
     script(src='/app/views/duinoChildView.js')

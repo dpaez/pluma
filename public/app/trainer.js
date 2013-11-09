@@ -108,7 +108,10 @@ PlumaApp.LeapTrainer = function( _, Backbone, Leap, LeapTrainer ) {
 
   function _trainingComplete( gestureName, trainingGestures ){
     console.log( 'Training gesture complete for: ', gestureName );
-    PlumaApp.trigger( 'plumaleap:training-complete', gestureName );
+    // Testing
+    PlumaApp.trainer.distribute( trainingGestures );
+    var gestureJSON = PlumaApp.trainer.toJSON( gestureName );
+    PlumaApp.trigger( 'plumaleap:training-complete', gestureName, gestureJSON );
   };
 
   function _gestureRecognized( hit, gestureName ){

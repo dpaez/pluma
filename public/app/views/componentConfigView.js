@@ -5,6 +5,7 @@ PlumaApp.ComponentSetupView = Backbone.ModalView.extend({
 
   events: {
     'click #confirm-setup' : 'updateComponent',
+    'submit form': 'updateComponent',
     'click #addKeyVal' : 'addKeyVal'
   },
 
@@ -23,10 +24,10 @@ PlumaApp.ComponentSetupView = Backbone.ModalView.extend({
   getFormValues: function(){
     var options = {};
     var allHashItems = this.$( '.hashitem' );
-
+    var $item;
     // create options hash
     _.each(allHashItems, function( hashItem ){
-      var $item = $( hashItem );
+      $item = $( hashItem );
       try{
         var hashKey = $item.find( '.key' ).val() || '';
         var hashValue = $item.find( '.value' ).val() || '';
@@ -34,7 +35,7 @@ PlumaApp.ComponentSetupView = Backbone.ModalView.extend({
         console.log( e );
       }
       if ( (hashKey !== '') && (hashValue !== '') ){
-        options[ hashKey ] = JSON.parse( hashValue );
+        options[ hashKey.toLowerCase() ] = JSON.parse( hashValue );
       }
     });
 
@@ -46,15 +47,27 @@ PlumaApp.ComponentSetupView = Backbone.ModalView.extend({
 
   updateComponent: function( e ){
     e.preventDefault();
+    e.stopPropagation();
 
-    // data is a hash which contains component options config and actions parameters
+    // data is a hash containing component config options and actions parameters
     var data = this.getFormValues();
+    console.log( 'options data: ', data );
 
-    // emit data as event that parent ( duinoChildView ) should catch
-    console.log( data );
-    var dbkey = 'config_' + this.component.componentType;
-    PlumaApp.GesturesDB.save( {key: dbkey, data: data } );
+    var componentData = {};
+    componentData.componentID = PlumaApp.KEYS['COMPONENT']( data.options );
+    componentData.type = this.component.componentType;
+    componentData.options = data.options;
 
+    PlumaApp.Storage.save({
+      key: componentData.componentID,
+      data: data,
+      componentType: this.component.componentType,
+      type: PlumaApp.TYPES['COMPONENT']
+    });
+
+    PlumaApp.socket.emit( 'plumaduino:create_component', componentData );
+
+    this.hideModal();
   },
 
   addKeyVal: function( e ){

@@ -11,7 +11,6 @@ PlumaApp.ComponentView = PlumaApp.BaseView.extend({
 
   initialize: function( options ){
     this.component = options.component;
-    this.modalView = new PlumaApp.ComponentSetupView({ component: this.component });
   },
 
   onRender: function(){
@@ -28,7 +27,11 @@ PlumaApp.ComponentView = PlumaApp.BaseView.extend({
   setupComponent: function( e ){
     e.preventDefault();
     e.stopPropagation();
-    this.modalView.render().showModal();
+    var modalView = new PlumaApp.ComponentSetupView({
+      component: this.component,
+      showCloseButton:false
+    });
+    modalView.render().showModal();
 
   },
 
@@ -55,14 +58,17 @@ PlumaApp.ComponentView = PlumaApp.BaseView.extend({
     //   default:
     //     break;
     // }
-    var dbkey = 'config_' + componentType;
-    var data = {};
-    PlumaApp.GesturesDB.get(dbkey, function( result ){
-      data.type = componentType;
-      data.options = result.data.options;
-    });
 
-    PlumaApp.socket.emit( 'plumaduino:create_component', data );
+
+    // DEPRECATED
+    // var dbkey = 'config_' + componentType;
+    // var data = {};
+    // data.type = componentType;
+    // PlumaApp.GesturesDB.get(dbkey, function( result ){
+    //   data.options = result.data.options;
+    // });
+
+    // PlumaApp.socket.emit( 'plumaduino:create_component', data );
   }
 
 

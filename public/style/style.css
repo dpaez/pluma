@@ -4,6 +4,7 @@ h1{font-size:3em}
 h2{font-size:2em;padding:0 .3125em}
 .step{width:95%;height:500px;margin-left:auto;margin-right:auto;border-width:1px;border-style:solid;border-color:#000}
 .footer{width:95%;height:100px;text-align:center;margin-left:auto;margin-right:auto;margin-top:50px}
+.error{visibility:hidden;color:#f00;font-style:italic}
 #gesture-sandbox,#duino-sandbox{width:85%;height:300px;border-width:1px;border-style:solid;border-color:#f00;margin-left:auto;margin-right:auto;margin-top:50px}
 .panel-small{width:25%;margin-left:auto;margin-right:auto;margin-top:50px;border-top-width:2px;border-top-style:solid;border-top-color:#000}
 .panel-small button{width:100%}

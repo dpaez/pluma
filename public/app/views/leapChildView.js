@@ -25,13 +25,16 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
     this.listenTo( PlumaApp, 'plumaleap:training-countdown', this.trainingCountdown );
     this.listenTo( PlumaApp, 'plumaleap:gesture-recognized', this.gestureRecognized );
     this.listenTo( PlumaApp, 'plumaleap:gesture-unknown', this.gestureUnknown );
+    this.listenTo( PlumaApp, 'plumaleap:render-gestures', this.addCreatedGestures );
     PlumaApp.isTraining = false;
+    this.currentGesture = '';
   },
 
   onRender: function(){
     var template = TemplateCache.get( this.template );
     var html = template();
     this.$el.html( html );
+    PlumaApp.trigger( 'plumaleap:render-gestures' );
     return this;
   },
 
@@ -53,9 +56,9 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
 
   newGesture: function(){
     console.log( 'calling new gesture' );
-    //trigger (leaptrainer) create event
-    PlumaApp.trigger( 'plumaleap:create', 'testGesture' );
     this.cleanUI();
+    var dataView = new PlumaApp.GestureCreationView();
+    dataView.render().showModal( {showCloseButton:false} );
   },
 
   trainingStarted: function(){
@@ -72,26 +75,32 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
     this.writeMsg( msg );
   },
 
-  trainingComplete: function( gestureName ){
+  trainingComplete: function( gestureName, gestureJSON ){
     var that = this;
+    var pack = undefined;
+    // if ( gestureJSON ){
+    //   pack = lzwCompress.pack(gestureJSON);
+    // }
+    var data = {
+      name: gestureName,
+      json: pack
+    };
+    PlumaApp.isTraining = false;
+    this.currentGesture = gestureName;
     this.writeMsg( 'Gesto aprendido!' );
 
-    // PlumaApp.GesturesDB.exists( 'gesture', function( result ){
-    //   if ( !result ){
-    //     PlumaApp.GesturesDB.save( {key: 'gesture', data: gestureName } );
-    //   }
-    // });
-
-    PlumaApp.GesturesDB.save( {key: 'gesture', data: gestureName } );
-    PlumaApp.isTraining = false;
+    PlumaApp.Storage.save({
+      key: gestureName,
+      data: data,
+      type: PlumaApp.TYPES['GESTURE']
+    });
     setTimeout(function(){
         that.writeMsg('Pruebe el gesto...');
-      }, 2000
-    );
+      }, 2000);
+    PlumaApp.trigger( 'plumaleap:render-gestures' );
   },
 
   gestureRecognized: function( gestData ){
-    
     var hit = Math.min(parseInt(100 * gestData.hit), 100);
     var msg = 'Gesto:' + gestData.name + ' detectado con confianza: ' + hit;
     this.writeInfo( msg );
@@ -115,8 +124,10 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
   },
 
   cancelNewGesture: function(){
+    if ( !this.currentGesture ){ return; }
     console.log( 'calling reset gesture' );
-    PlumaApp.trigger( 'plumaleap:reset', 'testGesture' );
+    // only can reset last gesture created
+    PlumaApp.trigger( 'plumaleap:reset', this.currentGesture );
     this.cleanUI();
   },
 
@@ -124,12 +135,15 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
     this.$( '#leap-feedback' ).text('');
   },
 
-  addGestures: function(){
-    var $userGestures = this.$( '.user-gestures' );
-    var tpl = _.template('<div id="<%= gestID %>", class="user-gest"> <p> <%= gestName %> </p> </div>');
+  addCreatedGestures: function(){
+    var $userGestures = this.$( '.known-gestures' );
+    var tpl = _.template('<div data-event="<%= gestName %>", class="user-gest"> <p> <%= gestName %> </p> </div>');
     $userGestures.empty();
-    PlumaApp.GesturesDB.get('gesture', function( result ){
-      $userGestures.append( tpl({ gestID: result.data, gestName: result.data }) );
+
+    PlumaApp.Storage.each(function( result ){
+      if ( result.type === PlumaApp.TYPES['GESTURE'] ){
+        $userGestures.append( tpl({ gestName: result.data.name }) );
+      }
     });
   }
 

@@ -11,10 +11,44 @@ var PlumaAppMain = function( _, Backbone, $, Lawnchair, PlumaApp ) {
 
   function _start(){
 
+    // Define some globals constants
+
+    PlumaApp.TYPES = {
+      'GESTURE' : 0,
+      'COMPONENT': 1,
+      'CONFIG' : 2,
+    };
+
+    PlumaApp.SOCKETS = {
+      'HOST': 'http://localhost',
+      'PORT': '8080'
+    };
+
     // Create local lawnchair
-    PlumaApp.GesturesDB = new Lawnchair( {name: 'gestures '}, function(){} );
+    PlumaApp.Storage = new Lawnchair( {name: 'PLUMA'}, function(){} );
+
+    // Create a key generator
+    PlumaApp.KEYS = {
+      'COMPONENT': function( options, prefix ){
+        if (!options){ return; }
+        prefix = prefix || 'key_';
+        var id = undefined;
+        if ( options.pin ){ id = prefix + options.pin.toString() };
+        if ( options.pins ){ id = prefix + options.pins.toString() };
+        return id;
+      },
+    };
+
+    // Create PlumaApp sockets
+    PlumaApp.socket = io.connect( PlumaApp.SOCKETS.HOST + ':' + PlumaApp.SOCKETS.PORT );
+
+    // PlumaApp sockets events
+    PlumaApp.socket.emit( 'plumaduino:components_status' );
+    PlumaApp.socket.on( 'plumaduino:components_attached', _.bind(_addComponents, this) );
 
     // Create App Views
+
+    // General app view
     app = new PlumaApp.AppView();
 
     // step 1
@@ -70,6 +104,13 @@ var PlumaAppMain = function( _, Backbone, $, Lawnchair, PlumaApp ) {
   function _prepare(){
     PlumaApp.currentPos = 0;
     PlumaApp.steps = [];
+  };
+
+  function _addComponents( components ){
+    PlumaApp.Storage.save({
+      key: 'components',
+      data : components
+    });
   };
 
   // Public API

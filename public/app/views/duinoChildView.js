@@ -10,23 +10,25 @@ PlumaApp.DuinoView = PlumaApp.BaseView.extend({
 
   template: '#duino-tpl',
 
-  events: {
-    'click .component-button' : 'enableComponent'
-  },
 
   initialize: function(){
     // Pluma socket events
-    PlumaApp.socket = io.connect('http://localhost:8080');
     PlumaApp.socket.emit( 'plumaduino:board_status' );
     PlumaApp.socket.on( 'plumaduino:board_ready', _.bind(this.boardReady, this) );
     PlumaApp.socket.on( 'plumaduino:component_ready', _.bind(this.componentReady, this) );
-    PlumaApp.socket.on( 'plumaduino:components_attached', _.bind(this.attachComponents, this) );
+    // DEPRECATED, moved to starter.js
+    //PlumaApp.socket.on( 'plumaduino:components_attached', _.bind(this.attachComponents, this) );
+
+    this.listenTo( this, 'render', this.attachComponents );
   },
 
   onRender: function(){
     var template = TemplateCache.get( this.template );
     var html = template();
     this.$el.html( html );
+
+    this.trigger( 'render' );
+
     return this;
   },
 
@@ -40,7 +42,11 @@ PlumaApp.DuinoView = PlumaApp.BaseView.extend({
     this.updateBoard( 'enabled' );
   },
 
-  attachComponents: function( components ){
+  attachComponents: function(){
+    var components = [];
+    PlumaApp.Storage.get('components', function( result ){
+      components = result.data;
+    });
     var $duinoComponents = this.$( '.duino-components' );
     _.each(components, function( component ) {
       var view = new PlumaApp.ComponentView( { component: component } );
@@ -50,7 +56,7 @@ PlumaApp.DuinoView = PlumaApp.BaseView.extend({
 
   componentReady: function( data ){
     console.log( 'Arduino component: %s is ready', data.componentType );
-    this.updateComponent( data.componentType, 'enabled' );
+    //this.updateComponent( data.componentType, 'enabled' );
   },
 
   updateBoard: function( status ){
@@ -72,6 +78,7 @@ PlumaApp.DuinoView = PlumaApp.BaseView.extend({
 
   updateComponent: function( id, status ){
     var datatype = "[data-type='" + id + "']";
+
     var $component = this.$( '.component-button' + datatype );
 
     switch ( status ){
@@ -87,36 +94,5 @@ PlumaApp.DuinoView = PlumaApp.BaseView.extend({
         break;
     }
   },
-
-  enableComponent: function( e ){
-    e.preventDefault();
-    var $component = $( e.currentTarget );
-    var componentType = $component.data( 'type' );
-    var options = {};
-    // TODO: these options objects should be created by the user...
-    switch( componentType ){
-      case 'lcd':
-        options = {
-          pins: [ 8, 9, 4, 5, 6, 7 ],
-          rows: 2,
-          cols: 16,
-        };
-        break;
-      case 'servo':
-        options = {
-          pin: 14 // A0, when using it with a shield
-        };
-        break;
-      default:
-        break;
-    }
-
-    var data = {
-      type: componentType,
-      options : options
-    };
-
-    PlumaApp.socket.emit( 'plumaduino:create_component', data );
-  }
 
 });
