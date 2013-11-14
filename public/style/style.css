@@ -2,6 +2,7 @@ body{font:100% "Lucida Grande",Helvetica,Arial,sans-serif;top:0;left:0;right:0;b
 a{color:#00b7ff}
 h1{font-size:3em}
 h2{font-size:2em;padding:0 .3125em}
+canvas{padding-left:0;padding-right:0;margin-left:auto;margin-right:auto;display:block;border-style:solid;border-color:#f00;border-width:1px}
 .step{width:95%;height:500px;margin-left:auto;margin-right:auto;border-width:1px;border-style:solid;border-color:#000}
 .footer{width:95%;height:100px;text-align:center;margin-left:auto;margin-right:auto;margin-top:50px}
 .error{visibility:hidden;color:#f00;font-style:italic}
