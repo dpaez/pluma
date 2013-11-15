@@ -33,12 +33,12 @@ PlumaApp.LeapTrainer = function( _, Backbone, Leap, LeapTrainer ) {
       trainingGestures: 1,
       minGestureFrames: 5,
       convolutionFactor: 0,
-      hitThreshold: 0.7,
+      hitThreshold: 0.65,
       downtime: 1000,
     });
 
     _modifyController( 'HRController' );
-    _modifyController( 'CorrelationController' );
+    //_modifyController( 'CorrelationController' );
 
     // Specific module events
     PlumaApp.on({
