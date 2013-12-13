@@ -100,17 +100,18 @@ PlumaApp.LeapDuinoView = PlumaApp.BaseView.extend({
         action: action,
         params: params
       } );
+      PlumaApp.trigger( 'plumaleap:gesture-component-fire', {gestureName: gestureName, component: componentID} );
     });
     $comp.addClass( 'linked' );
 
     var $targetDrag = this.$el.find("[data-event='" + gestureName + "']");
 
     $targetDrag.addClass( 'linked ');
-
     setTimeout(function(){
       $comp.removeClass( 'linked' );
       $targetDrag.removeClass( 'linked' );
     }, 2000);
+
     console.log( 'Binding gesture with component: done.' );
     return false;
   }

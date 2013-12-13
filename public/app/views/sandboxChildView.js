@@ -11,7 +11,7 @@ PlumaApp.SandboxView = PlumaApp.BaseView.extend({
   },
 
   initialize: function(){
-
+    this.listenTo( PlumaApp, 'plumaleap:gesture-component-fire', this.alertTrigger );
   },
 
   onRender: function(){
@@ -24,6 +24,11 @@ PlumaApp.SandboxView = PlumaApp.BaseView.extend({
   onRemove: function(){
     this.$el.empty();
   },
+
+  alertTrigger: function(){
+    this.$el.find( 'p' ).fadeIn( 'slow' );
+    this.$el.find( 'p' ).fadeOut( 'slow' );
+  }
 
 
 });

@@ -77,6 +77,7 @@ PlumaApp.DuinoView = PlumaApp.BaseView.extend({
   },
 
   updateComponent: function( id, status ){
+    //TODO: check this....its old
     var datatype = "[data-type='" + id + "']";
 
     var $component = this.$( '.component-button' + datatype );
