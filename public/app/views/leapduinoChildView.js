@@ -42,6 +42,7 @@ PlumaApp.LeapDuinoView = PlumaApp.BaseView.extend({
     var $userGestures = this.$( '.user-gestures' );
     var tpl = _.template('<div data-event="<%= gestName %>", class="user-gest", draggable=true> <p> <%= gestName %> </p> </div>');
     $userGestures.empty();
+    $userGestures.append( "<p>Gestos Seleccionados </p>");
     PlumaApp.Storage.each(function( result ){
       if ( (result) && (result.type !== PlumaApp.TYPES['GESTURE']) ){ return; }
       $userGestures.append( tpl({ gestName: result.data.name }) );

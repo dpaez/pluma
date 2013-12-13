@@ -18,13 +18,15 @@ canvas{display:block;padding-left:0;padding-right:0;margin-left:auto;margin-righ
 .leap-msg{padding-bottom:.4em;text-align:center;height:1em;font-size:.7em;font-weight:bold;color:#008000}
 .leap-msg > .warning{color:#ffa500}
 .known-gestures{position:absolute;left:100%;width:100%;top:14.25%}
-.duino-board{float:right;width:30%;height:300px;padding:.8em .2em}
-.duino-components,.user-gestures{height:150px;margin-top:10px;padding:.4em}
+.duino-board{float:right;width:360px;height:150px;background-image:url("../images/duino_board.png");background-repeat:no-repeat;background-size:50%;padding:.8em .2em;margin:0}
+.blur{width:367px;height:159px;filter:blur(3px);-webkit-filter:blur(3px);-moz-filter:blur(3px);-o-filter:blur(3px);-ms-filter:blur(3px)}
+.user-gestures{position:absolute;width:100%}
 .duino-comp,.user-gest{width:14%;height:40px;border-width:1px;border-style:solid;border-color:#000;font-size:.8em;margin-top:.5em}
+.duino-comp{background-image:url("../images/protoboard.gif");background-size:256px;width:256px;height:92px}
+.user-gest{background-image:url("../images/five_finger_gesture.png");background-size:91%;background-repeat:no-repeat;width:136px;height:117px}
 .duino-comp p{text-align:left;display:inline-block;margin:0;padding:.2em;vertical-align:top;zoom:1;*display:inline;}
 .duino-comp button{text-align:center;float:right}
 .duino-status{width:15%;height:70px;border-width:2px;border-style:solid;border-color:#008000}
 .duino-comp.over{border-color:#00f}
 .duino-comp.linked,.test-gest.linked{border-color:#008000;border-width:2px}
-.fullscreen{width:95%;margin-left:auto;margin-right:auto;height:300px;border-width:5px;border-style:solid;border-color:#ff0}
-.fullscreen:before{position:absolute;display:block;content:'';box-sizing:border-box;margin-top:-3.9px;margin-left:-4.6px;width:90.3%;height:300.5px;border-width:5px;border-style:dashed;border-color:#000}
+.fullscreen{position:absolute;top:94px;bottom:94px;right:25px;left:25px;width:95%;border-image-slice:20 51 26 66;border-image-width:13px 13px 13px 13px;border-image-outset:13px 13px 13px 13px;border-image-repeat:repeat repeat;border-image-source:url("http://img.photobucket.com/albums/v646/MusicAddict135/by_tile.png")}

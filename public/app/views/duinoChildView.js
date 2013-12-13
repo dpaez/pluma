@@ -60,15 +60,15 @@ PlumaApp.DuinoView = PlumaApp.BaseView.extend({
   },
 
   updateBoard: function( status ){
-    var $board = this.$( '.duino-status' );
+    var $board = this.$( '.duino-board' );
 
     switch ( status ){
       case 'enabled':
-        $board.css({'background-color': 'green'});
+        $board.removeClass( 'blur' );
         break;
 
       case 'disabled':
-        $board.css({'background-color': 'red'});
+        $board.addClass( 'blur' );
         break;
 
       default:

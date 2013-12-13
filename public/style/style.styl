@@ -124,14 +124,26 @@ canvas
 // ******************
 .duino-board
   float: right
-  width: 30%
-  height: 300px
-  padding: 0.8em 0.2em
-
-.duino-components, .user-gestures
+  width: 360px
   height: 150px
-  margin-top: 10px
-  padding: 0.4em
+  background-image: url("../images/duino_board.png")
+  background-repeat: no-repeat
+  background-size: 50%
+  padding: .8em .2em
+  margin: 0
+
+.blur
+  width:367px
+  height:159px
+  filter: blur(3px)
+  -webkit-filter: blur(3px)
+  -moz-filter: blur(3px)
+  -o-filter: blur(3px)
+  -ms-filter: blur(3px)
+
+.user-gestures
+  position: absolute
+  width: 100%
 
 .duino-comp, .user-gest
   width: 14%
@@ -141,6 +153,19 @@ canvas
   border-color: black
   font-size: 0.8em
   margin-top: 0.5em
+
+.duino-comp
+  background-image: url(../images/protoboard.gif)
+  background-size: 256px
+  width: 256px
+  height: 92px
+
+.user-gest
+  background-image: url(../images/five_finger_gesture.png)
+  background-size: 91%
+  background-repeat: no-repeat
+  width: 136px
+  height: 117px
 
 .duino-comp p
   text-align: left
@@ -180,29 +205,40 @@ canvas
 // Step 4
 // ******************
 
+// .fullscreen
+//   width: 95%
+//   margin-left: auto
+//   margin-right: auto
+//   height: 300px
+//   border-width: 5px
+//   border-style: solid
+//   border-color: yellow
+
+// .fullscreen:before
+//   position: absolute
+//   display: block
+//   content: ''
+//   box-sizing: border-box
+//   margin-top: -3.9px
+//   margin-left: -4.6px
+//   width: 90.3%
+//   height: 300.5px
+//   border-width: 5px
+//   border-style: dashed
+//   border-color: black
+
 .fullscreen
-  width: 95%
-  margin-left: auto
-  margin-right: auto
-  height: 300px
-  border-width: 5px
-  border-style: solid
-  border-color: yellow
-
-.fullscreen:before
   position: absolute
-  display: block
-  content: ''
-  box-sizing: border-box
-  margin-top: -3.9px
-  margin-left: -4.6px
-  width: 90.3%
-  height: 300.5px
-  border-width: 5px
-  border-style: dashed
-  border-color: black
-
-
+  top: 94px
+  bottom: 94px
+  right: 25px
+  left: 25px
+  width: 95%
+  border-image-slice: 20 51 26 66
+  border-image-width: 13px 13px 13px 13px
+  border-image-outset: 13px 13px 13px 13px
+  border-image-repeat: repeat repeat
+  border-image-source: url("http://img.photobucket.com/albums/v646/MusicAddict135/by_tile.png")
 
 // ******************
 // Icons
