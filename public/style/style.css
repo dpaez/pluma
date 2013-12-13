@@ -1,18 +1,23 @@
-body{font:100% "Lucida Grande",Helvetica,Arial,sans-serif;top:0;left:0;right:0;bottom:0;overflow-y:hidden;overflow-x:hidden;width:100%;padding:0;margin:0}
+body{font:100% "Lucida Grande",Helvetica,Arial,sans-serif;top:0;left:0;right:0;bottom:0;overflow-y:hidden;overflow-x:hidden;padding:0;margin:0}
 a{color:#00b7ff}
 h1{font-size:3em}
 h2{font-size:2em;padding:0 .3125em}
-canvas{padding-left:0;padding-right:0;margin-left:auto;margin-right:auto;display:block;border-style:solid;border-color:#f00;border-width:1px}
-.step{width:95%;height:500px;margin-left:auto;margin-right:auto;border-width:1px;border-style:solid;border-color:#000}
-.footer{width:95%;height:100px;text-align:center;margin-left:auto;margin-right:auto;margin-top:50px}
+canvas{display:block;padding-left:0;padding-right:0;margin-left:auto;margin-right:auto;border-style:solid;border-color:#f00;border-width:1px}
+.step{position:absolute;top:94px;bottom:94px;width:100%}
+.footer{position:absolute;height:100px;bottom:10px;right:10px;left:10px}
 .error{visibility:hidden;color:#f00;font-style:italic}
-#gesture-sandbox,#duino-sandbox{width:85%;height:300px;border-width:1px;border-style:solid;border-color:#f00;margin-left:auto;margin-right:auto;margin-top:50px}
-.panel-small{width:25%;margin-left:auto;margin-right:auto;margin-top:50px;border-top-width:2px;border-top-style:solid;border-top-color:#000}
+.sandbox{width:95%;height:85%;border-width:1px;border-style:solid;border-color:#f00;margin-left:auto;margin-right:auto}
+.footer button{position:absolute;display:inline-block;width:10%;bottom:10px}
+.footer button.prev-step{left:35%}
+.footer button.next-step{left:55%}
+#step-one{width:80%}
+.panel-small{position:absolute;width:25%;bottom:4%;left:37.5%;border-top-width:2px;border-top-style:solid;border-top-color:#000}
 .panel-small button{width:100%}
 .panel-small .stop-trainer{float:right}
 .trainer-msg{text-align:center;font-size:2em;color:#808080}
-.leap-msg{text-align:center;height:1em;font-size:.7em;font-weight:bold;color:#008000}
+.leap-msg{padding-bottom:.4em;text-align:center;height:1em;font-size:.7em;font-weight:bold;color:#008000}
 .leap-msg > .warning{color:#ffa500}
+.known-gestures{position:absolute;left:100%;width:100%;top:14.25%}
 .duino-board{float:right;width:30%;height:300px;padding:.8em .2em}
 .duino-components,.user-gestures{height:150px;margin-top:10px;padding:.4em}
 .duino-comp,.user-gest{width:14%;height:40px;border-width:1px;border-style:solid;border-color:#000;font-size:.8em;margin-top:.5em}

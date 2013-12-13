@@ -144,7 +144,7 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
   },
 
   addCreatedGestures: function(){
-    var $userGestures = this.$( '.known-gestures' );
+    var $userGestures = this.$( '.known-gestures-list' );
     var tpl = _.template('<div data-event="<%= gestName %>", class="user-gest"> <p> <%= gestName %> </p> </div>');
     $userGestures.empty();
 
