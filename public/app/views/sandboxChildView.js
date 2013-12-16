@@ -25,9 +25,9 @@ PlumaApp.SandboxView = PlumaApp.BaseView.extend({
     this.$el.empty();
   },
 
-  alertTrigger: function(){
-    this.$el.find( 'p' ).fadeIn( 'slow' );
-    this.$el.find( 'p' ).fadeOut( 'slow' );
+  alertTrigger: function( data ){
+    var msg = 'Gesto detectado: ' + data.gestureName + ' | ' + 'Componente activado: ' + data.component;
+    this.$el.find( 'p' ).text( msg ).fadeIn( 'slow' ).fadeOut( 3000 );
   }
 
 
