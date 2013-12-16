@@ -42,6 +42,7 @@ PlumaApp.LeapDuinoView = PlumaApp.BaseView.extend({
     var $userGestures = this.$( '.user-gestures' );
     var tpl = _.template('<div data-event="<%= gestName %>", class="user-gest", draggable=true> <p> <%= gestName %> </p> </div>');
     $userGestures.empty();
+    $userGestures.append( "<p>Gestos Seleccionados </p>");
     PlumaApp.Storage.each(function( result ){
       if ( (result) && (result.type !== PlumaApp.TYPES['GESTURE']) ){ return; }
       $userGestures.append( tpl({ gestName: result.data.name }) );
@@ -99,17 +100,18 @@ PlumaApp.LeapDuinoView = PlumaApp.BaseView.extend({
         action: action,
         params: params
       } );
+      PlumaApp.trigger( 'plumaleap:gesture-component-fire', {gestureName: gestureName, component: componentID} );
     });
     $comp.addClass( 'linked' );
 
     var $targetDrag = this.$el.find("[data-event='" + gestureName + "']");
 
     $targetDrag.addClass( 'linked ');
-
     setTimeout(function(){
       $comp.removeClass( 'linked' );
       $targetDrag.removeClass( 'linked' );
     }, 2000);
+
     console.log( 'Binding gesture with component: done.' );
     return false;
   }

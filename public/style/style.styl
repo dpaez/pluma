@@ -3,9 +3,11 @@ body
   top: 0; left: 0; right: 0; bottom: 0;
   overflow-y: hidden
   overflow-x: hidden
-  width: 100%
+  //width: 100%
+  //height: 100%
   padding: 0
   margin: 0
+
 a
   color: #00B7FF
 
@@ -16,23 +18,29 @@ h2
   font-size: 2em
   padding: 0 0.3125em
 
+canvas
+  display: block
+  padding-left: 0
+  padding-right: 0
+  margin-left: auto
+  margin-right: auto
+  border-style: solid
+  border-color: red
+  border-width: 1px
 
 .step
-  width: 95%
-  height: 500px
-  margin-left: auto
-  margin-right: auto
-  border-width: 1px
-  border-style: solid
-  border-color: black
+  position: absolute
+  top: 94px
+  bottom: 94px
+  width: 100%
 
 .footer
-  width: 95%
+  position: absolute
   height: 100px
-  text-align: center
-  margin-left: auto
-  margin-right: auto
-  margin-top: 50px
+  bottom: 10px
+  right: 10px
+  left: 10px
+
 
 .error
   visibility: hidden
@@ -43,25 +51,40 @@ h2
 // Common steps style
 // ******************
 
-#gesture-sandbox, #duino-sandbox
-  width: 85%
-  height: 300px
+.sandbox
+  width: 95%
+  height: 85%
   border-width: 1px
   border-style: solid
   border-color: red
   margin-left: auto
   margin-right: auto
-  margin-top: 50px
+
+.footer button
+  position: absolute
+  display: inline-block
+  width: 10%
+  bottom: 10px
+
+.footer button.prev-step
+  left: 35%
+
+.footer button.next-step
+  left: 55%
+
 
 // ******************
 // Step 1 (Leap)
 // ******************
 
+#step-one
+  width: 80%
+
 .panel-small
+  position: absolute
   width: 25%
-  margin-left: auto
-  margin-right: auto
-  margin-top: 50px
+  bottom: 4%
+  left: 37.5% // absoluteHalfScreenSize - (elementWidth/2)
   border-top-width: 2px
   border-top-style: solid
   border-top-color: black
@@ -78,6 +101,7 @@ h2
   color: gray
 
 .leap-msg
+  padding-bottom: 0.4em
   text-align: center
   height: 1em
   font-size: 0.7em
@@ -87,6 +111,12 @@ h2
 .leap-msg > .warning
   color: orange
 
+.known-gestures
+  position: absolute
+  left: 100%
+  width: 100%
+  top: 14.25%
+
 
 
 // ******************
@@ -94,14 +124,26 @@ h2
 // ******************
 .duino-board
   float: right
-  width: 30%
-  height: 300px
-  padding: 0.8em 0.2em
-
-.duino-components, .user-gestures
+  width: 360px
   height: 150px
-  margin-top: 10px
-  padding: 0.4em
+  background-image: url("../images/duino_board.png")
+  background-repeat: no-repeat
+  background-size: 50%
+  padding: .8em .2em
+  margin: 0
+
+.blur
+  width:367px
+  height:159px
+  filter: blur(3px)
+  -webkit-filter: blur(3px)
+  -moz-filter: blur(3px)
+  -o-filter: blur(3px)
+  -ms-filter: blur(3px)
+
+.user-gestures
+  position: absolute
+  width: 100%
 
 .duino-comp, .user-gest
   width: 14%
@@ -111,6 +153,19 @@ h2
   border-color: black
   font-size: 0.8em
   margin-top: 0.5em
+
+.duino-comp
+  background-image: url(../images/protoboard.gif)
+  background-size: 256px
+  width: 256px
+  height: 92px
+
+.user-gest
+  background-image: url(../images/five_finger_gesture.png)
+  background-size: 91%
+  background-repeat: no-repeat
+  width: 136px
+  height: 117px
 
 .duino-comp p
   text-align: left
@@ -150,28 +205,51 @@ h2
 // Step 4
 // ******************
 
+// .fullscreen
+//   width: 95%
+//   margin-left: auto
+//   margin-right: auto
+//   height: 300px
+//   border-width: 5px
+//   border-style: solid
+//   border-color: yellow
+
+// .fullscreen:before
+//   position: absolute
+//   display: block
+//   content: ''
+//   box-sizing: border-box
+//   margin-top: -3.9px
+//   margin-left: -4.6px
+//   width: 90.3%
+//   height: 300.5px
+//   border-width: 5px
+//   border-style: dashed
+//   border-color: black
+
 .fullscreen
-  width: 95%
-  margin-left: auto
-  margin-right: auto
-  height: 300px
-  border-width: 5px
-  border-style: solid
-  border-color: yellow
-
-.fullscreen:before
   position: absolute
-  display: block
-  content: ''
-  box-sizing: border-box
-  margin-top: -3.9px
-  margin-left: -4.6px
-  width: 90.3%
-  height: 300.5px
-  border-width: 5px
-  border-style: dashed
-  border-color: black
+  top: 94px
+  bottom: 94px
+  right: 25px
+  left: 25px
+  width: 95%
+  border-image-slice: 20 51 26 66
+  border-image-width: 13px 13px 13px 13px
+  border-image-outset: 13px 13px 13px 13px
+  border-image-repeat: repeat repeat
+  border-image-source: url("http://img.photobucket.com/albums/v646/MusicAddict135/by_tile.png")
 
+.fullscreen p
+  position: absolute
+  top: 40%
+  left: 25%
+  width: 5%
+  height: 5%
+  text-align: center
+  font-size: 1.5em
+  font-weight: bold
+  color: silver
 
 
 // ******************

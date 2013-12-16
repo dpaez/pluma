@@ -26,6 +26,7 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
     this.listenTo( PlumaApp, 'plumaleap:gesture-recognized', this.gestureRecognized );
     this.listenTo( PlumaApp, 'plumaleap:gesture-unknown', this.gestureUnknown );
     this.listenTo( PlumaApp, 'plumaleap:render-gestures', this.addCreatedGestures );
+    this.listenTo( PlumaApp, 'plumaleap:frame', this.drawFrame );
     PlumaApp.isTraining = false;
     this.currentGesture = '';
   },
@@ -35,6 +36,9 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
     var html = template();
     this.$el.html( html );
     PlumaApp.trigger( 'plumaleap:render-gestures' );
+
+    PlumaApp.Points.init();
+
     return this;
   },
 
@@ -52,6 +56,10 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
 
   leapConnected: function(){
     console.log( 'Leap Device is connected' );
+  },
+
+  drawFrame: function( frame ) {
+    PlumaApp.Points.draw( frame );
   },
 
   newGesture: function(){
@@ -136,7 +144,7 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
   },
 
   addCreatedGestures: function(){
-    var $userGestures = this.$( '.known-gestures' );
+    var $userGestures = this.$( '.known-gestures-list' );
     var tpl = _.template('<div data-event="<%= gestName %>", class="user-gest"> <p> <%= gestName %> </p> </div>');
     $userGestures.empty();
 

@@ -6,6 +6,7 @@ PlumaApp.trainer = {};
 PlumaApp.controller = {};
 
 PlumaApp.LeapTrainer = function( _, Backbone, Leap, LeapTrainer ) {
+  var i = 0;
 
   function _modifyController(replacementController) {
 
@@ -57,7 +58,7 @@ PlumaApp.LeapTrainer = function( _, Backbone, Leap, LeapTrainer ) {
     PlumaApp.controller.on( 'connect', _leapConnected );
     PlumaApp.controller.on( 'deviceDisconnected', _leapDisconnected );
     PlumaApp.controller.on( 'ready', _leapReady );
-    //PlumaApp.controller.on( 'frame', _leapFrame );
+    PlumaApp.controller.on( 'frame', _leapFrame );
 
     PlumaApp.controller.connect();
   };
@@ -87,7 +88,14 @@ PlumaApp.LeapTrainer = function( _, Backbone, Leap, LeapTrainer ) {
   };
 
   function _leapFrame( frame ){
-    console.log(frame);
+    i++;
+    // track only 40frame/s
+    if ( i%3 === 0 ) {
+      if (frame.valid) {
+        PlumaApp.trigger( 'plumaleap:frame', frame );
+      }
+      i = 0;
+    }
   };
 
   /*
