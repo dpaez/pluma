@@ -31,8 +31,9 @@ PlumaApp.LeapDuinoView = PlumaApp.BaseView.extend({
     this.$el.empty();
   },
 
+  // TODO: check this
   cleanGesturesBindings: function(){
-    PlumaApp.Storage.each(function( result ){
+    PlumaApp.Storage.each(function( key, result ){
       if ( (result) && (result.type !== PlumaApp.TYPES['GESTURE']) ){ return; }
       PlumaApp.trainer.off( result.data.name );
     });
@@ -43,7 +44,7 @@ PlumaApp.LeapDuinoView = PlumaApp.BaseView.extend({
     var tpl = _.template('<div data-event="<%= gestName %>", class="user-gest", draggable=true> <p> <%= gestName %> </p> </div>');
     $userGestures.empty();
     $userGestures.append( "<p>Gestos Seleccionados </p>");
-    PlumaApp.Storage.each(function( result ){
+    PlumaApp.Storage.each(function( key, result ){
       if ( (result) && (result.type !== PlumaApp.TYPES['GESTURE']) ){ return; }
       $userGestures.append( tpl({ gestName: result.data.name }) );
     });
@@ -54,7 +55,7 @@ PlumaApp.LeapDuinoView = PlumaApp.BaseView.extend({
 
     var tpl = _.template('<div class="duino-comp", data-id="<%= componentID %>", data-type="<%= componentType %>", dropzone="link string:text/plain"><span><%= componentName %></span></div>');
 
-    PlumaApp.Storage.each(function( result, idx ){
+    PlumaApp.Storage.each(function( key, result ){
       if ( (result) && (result.type !== PlumaApp.TYPES['COMPONENT']) ){ return; }
 
       $duinoComponents.append( tpl({
@@ -81,19 +82,20 @@ PlumaApp.LeapDuinoView = PlumaApp.BaseView.extend({
 
   dropEndComp: function( e ){
     var $comp = $( e.currentTarget );
-    $comp.removeClass( 'over' );
     var gestureName = e.originalEvent.dataTransfer.getData( 'string:text/plain' );
     var componentID = $comp.data( 'id' );
     var componentType = $comp.data( 'type' );
     var action = 'defaultAction';
     var params;
+    var result;
 
-    PlumaApp.Storage.get(componentID, function( result ){
-      params = result.data.params;
-    });
+    $comp.removeClass( 'over' );
+
+    result = PlumaApp.Storage.fetch( componentID );
+    params = result.data.params;
 
     PlumaApp.trainer.on( gestureName, function(){
-      console.log( 'gesture-component binding triggered' );
+      console.log( 'gesture-component binding triggered: %s %s', gestureName, componentID );
       PlumaApp.socket.emit( 'plumaduino:component_do', {
         componentID: componentID,
         componentType: componentType,

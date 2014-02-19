@@ -58,12 +58,14 @@ PlumaApp.ComponentSetupView = Backbone.ModalView.extend({
     componentData.type = this.component.componentType;
     componentData.options = data.options;
 
-    PlumaApp.Storage.save({
-      key: componentData.componentID,
-      data: data,
-      componentType: this.component.componentType,
-      type: PlumaApp.TYPES['COMPONENT']
-    });
+    PlumaApp.Storage.put(
+      componentData.componentID,
+      {
+        data: data,
+        componentType: this.component.componentType,
+        type: PlumaApp.TYPES['COMPONENT']
+      }
+    );
 
     PlumaApp.socket.emit( 'plumaduino:create_component', componentData );
 

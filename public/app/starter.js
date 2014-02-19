@@ -1,7 +1,7 @@
 /**
  * Pluma App igniter module
  */
-var PlumaAppMain = function( _, Backbone, $, Lawnchair, PlumaApp ) {
+var PlumaAppMain = function( _, Backbone, $, SimpleStorage, PlumaApp ) {
 
   var app,
     step1,
@@ -24,8 +24,8 @@ var PlumaAppMain = function( _, Backbone, $, Lawnchair, PlumaApp ) {
       'PORT': '8080'
     };
 
-    // Create local lawnchair
-    PlumaApp.Storage = new Lawnchair( {name: 'PLUMA'}, function(){} );
+    // Create a simple storage
+    PlumaApp.Storage = SimpleStorage.create( 'PLUMA' );
 
     // Create a key generator
     PlumaApp.KEYS = {
@@ -107,10 +107,7 @@ var PlumaAppMain = function( _, Backbone, $, Lawnchair, PlumaApp ) {
   };
 
   function _addComponents( components ){
-    PlumaApp.Storage.save({
-      key: 'components',
-      data : components
-    });
+    PlumaApp.Storage.put( 'components', components );
   };
 
   // Public API
@@ -124,4 +121,4 @@ var PlumaAppMain = function( _, Backbone, $, Lawnchair, PlumaApp ) {
     start: publicStart
   };
 
-}( _, Backbone, jQuery, Lawnchair, PlumaApp );
+}( _, Backbone, jQuery, SimpleStorage, PlumaApp );

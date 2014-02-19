@@ -38,7 +38,6 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
     PlumaApp.trigger( 'plumaleap:render-gestures' );
 
     PlumaApp.Points.init();
-
     return this;
   },
 
@@ -84,11 +83,13 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
   },
 
   trainingComplete: function( gestureName, gestureJSON ){
-    var that = this;
-    var pack = undefined;
-    // if ( gestureJSON ){
-    //   pack = lzwCompress.pack(gestureJSON);
-    // }
+    var that = this,
+      pack;
+
+    if ( gestureJSON ){
+      pack = LZString.compress( gestureJSON );
+    }
+
     var data = {
       name: gestureName,
       json: pack
@@ -97,11 +98,14 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
     this.currentGesture = gestureName;
     this.writeMsg( 'Gesto aprendido!' );
 
-    PlumaApp.Storage.save({
-      key: gestureName,
-      data: data,
-      type: PlumaApp.TYPES['GESTURE']
-    });
+    PlumaApp.Storage.put(
+      gestureName,
+      {
+        data: data,
+        type: PlumaApp.TYPES['GESTURE']
+      }
+    );
+
     setTimeout(function(){
         that.writeMsg('Pruebe el gesto...');
       }, 2000);
@@ -148,13 +152,14 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
     var tpl = _.template('<div data-event="<%= gestName %>", class="user-gest"> <p> <%= gestName %> </p> </div>');
     $userGestures.empty();
 
-    PlumaApp.Storage.each(function( result ){
-      if ( result.type === PlumaApp.TYPES['GESTURE'] ){
+    PlumaApp.Storage.each(function( key, result ){
+      if ( ( result.type === PlumaApp.TYPES['GESTURE'] ) && ( result.data.json ) ) {
+
         $userGestures.append( tpl({ gestName: result.data.name }) );
+
+        PlumaApp.trainer.fromJSON( LZString.decompress(result.data.json) );
       }
     });
   }
-
-
 
 });
