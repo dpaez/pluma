@@ -12,7 +12,8 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
 
   events: {
     'click .start-trainer':   'newGesture',
-    'click .stop-trainer':    'cancelNewGesture',
+    'click .gest-reset':      'resetGesture',
+    'click .gest-delete':     'deleteGesture'
   },
 
   initialize: function(){
@@ -135,21 +136,13 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
     this.$( '#leap-feedback' ).addClass( 'warning' ).text( msg ).fadeIn( 'fast' ).fadeOut( 3000 );
   },
 
-  cancelNewGesture: function(){
-    if ( !this.currentGesture ){ return; }
-    console.log( 'calling reset gesture' );
-    // only can reset last gesture created
-    PlumaApp.trigger( 'plumaleap:reset', this.currentGesture );
-    this.cleanUI();
-  },
-
   cleanUI: function(){
     this.$( '#leap-feedback' ).text('');
   },
 
   addCreatedGestures: function(){
     var $userGestures = this.$( '.known-gestures-list' );
-    var tpl = _.template('<div data-event="<%= gestName %>", class="user-gest"> <p> <%= gestName %> </p> </div>');
+    var tpl = _.template('<div data-event="<%= gestName %>", class="user-gest"> <p> <%= gestName %> </p> <span class="gest-reset"> Reset </span> <span class="gest-delete"> Delete </span> </div>');
     $userGestures.empty();
 
     PlumaApp.Storage.each(function( key, result ){
@@ -160,6 +153,39 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
         PlumaApp.trainer.fromJSON( LZString.decompress(result.data.json) );
       }
     });
+  },
+
+  resetGesture: function( e ){
+    e.preventDefault();
+
+    var $gestEl,
+      gestureName;
+
+    $gestEl = $( e.currentTarget ).parent();  // to get the element with the data-event
+
+    gestureName = $gestEl.data( 'event' );
+
+    console.log( 'calling reset gesture: ', gestureName );
+
+    PlumaApp.trigger( 'plumaleap:reset', gestureName );
+
+    this.cleanUI();
+  },
+
+  deleteGesture: function( e ){
+    e.preventDefault();
+
+    var $gestEl,
+      gestureName;
+
+    $gestEl = $( e.currentTarget ).parent(); // to get the element with the data-event
+    gestureName = $gestEl.data( 'event' );
+
+    PlumaApp.trainer.off( gestureName );
+    delete PlumaApp.trainer.gestures[ gestureName ];
+    PlumaApp.Storage.forward( 'remove', [gestureName] );
+    $gestEl.remove();
+
   }
 
 });

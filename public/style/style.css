@@ -18,6 +18,9 @@ canvas{display:block;padding-left:0;padding-right:0;margin-left:auto;margin-righ
 .leap-msg{padding-bottom:.4em;text-align:center;height:1em;font-size:.7em;font-weight:bold;color:#008000}
 .leap-msg > .warning{color:#ffa500}
 .known-gestures{position:absolute;left:100%;width:100%;top:14.25%}
+.known-gestures p{padding-bottom:3em}
+.gest-reset{left:0;bottom:0;color:#808080;font-weight:bold;cursor:pointer}
+.gest-delete{float:right;bottom:0;right:0;color:#f00;font-weight:bold;cursor:pointer}
 .duino-board{float:right;width:360px;height:150px;background-image:url("../images/duino_board.png");background-repeat:no-repeat;background-size:50%;padding:.8em .2em;margin:0}
 .blur{width:367px;height:159px;filter:blur(3px);-webkit-filter:blur(3px);-moz-filter:blur(3px);-o-filter:blur(3px);-ms-filter:blur(3px)}
 .user-gestures{position:absolute;width:100%}

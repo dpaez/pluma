@@ -26,12 +26,12 @@ PlumaApp.LeapTrainer = function( _, Backbone, Leap, LeapTrainer ) {
   function _init(){
     // New Leap controller instance
     PlumaApp.controller = new Leap.Controller();
+
     // Start leap trainer
     PlumaApp.trainer = new LeapTrainer.Controller({
       controller: PlumaApp.controller,
-      //minRecordingVelocity: 600,
       //maxRecordingVelocity: 30,
-      trainingGestures: 1,
+      trainingGestures: 2,
       minGestureFrames: 5,
       convolutionFactor: 0,
       hitThreshold: 0.65,
