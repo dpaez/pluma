@@ -4,8 +4,8 @@ PlumaApp.GestureCreationView = Backbone.ModalView.extend({
   template: '#leap-creation-tpl',
 
   events: {
-    'click #createGesture' : 'createGesture',
-    'submit form' : 'createGesture'
+    'click #createGesture' :  'createGesture',
+    'submit form' :           'createGesture'
   },
 
   render: function(){

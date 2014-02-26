@@ -30,8 +30,8 @@ PlumaApp.ParentView = PlumaApp.BaseView.extend({
     _.each( this.childViews, function( ViewObj ){
       var View = ViewObj.view;
       var view = new View();
-      if (ViewObj.options){
-        view.setElement( ViewObj.options.el );  
+      if ( ViewObj.options ){
+        view.setElement( ViewObj.options.el );
       }
       view.delegateEvents();
       this.$el.append( view.render().$el );

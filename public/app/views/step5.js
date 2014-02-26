@@ -2,13 +2,13 @@
  * Extends ParentView
  */
 
-PlumaApp.StepFourView = PlumaApp.ParentView.extend({
+PlumaApp.StepFiveView = PlumaApp.ParentView.extend({
 
-  el: '#step-four',
-  template: '#metaphor-container-tpl',
+  el: '#step-five',
+  template: '#tester-container-tpl',
 
   launch: function(){
-    console.log( 'launching step 4' );
+    console.log( 'launching step 5' );
     this.render();
     $('.step').hide( 0 );
     this.$el.show();

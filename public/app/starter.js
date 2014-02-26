@@ -1,12 +1,14 @@
 /**
  * Pluma App igniter module
  */
-var PlumaAppMain = function( _, Backbone, $, SimpleStorage, PlumaApp ) {
+var PlumaAppMain = function( _, Backbone, $, SimpleStorage, Points, PlumaApp ) {
 
   var app,
     step1,
     step2,
     step3,
+    step4,
+    step5,
     router;
 
   function _start(){
@@ -46,7 +48,10 @@ var PlumaAppMain = function( _, Backbone, $, SimpleStorage, PlumaApp ) {
     PlumaApp.socket.emit( 'plumaduino:components_status' );
     PlumaApp.socket.on( 'plumaduino:components_attached', _.bind(_addComponents, this) );
 
-    // Create App Views
+    // Attach points app
+    PlumaApp.Points = Points;
+
+    // Create App Views...
 
     // General app view
     app = new PlumaApp.AppView();
@@ -75,6 +80,13 @@ var PlumaAppMain = function( _, Backbone, $, SimpleStorage, PlumaApp ) {
     // step 4
     step4 = new PlumaApp.StepFourView();
     step4.addChildView({
+      view: PlumaApp.MetaphorView,
+      options: { el: '#metaphor-sandbox' }
+    });
+
+    // step 5
+    step5 = new PlumaApp.StepFiveView();
+    step5.addChildView({
       view: PlumaApp.SandboxView,
       options: { el: '#tester-sandbox' }
     });
@@ -83,11 +95,13 @@ var PlumaAppMain = function( _, Backbone, $, SimpleStorage, PlumaApp ) {
     PlumaApp.steps.push( step2 );
     PlumaApp.steps.push( step3 );
     PlumaApp.steps.push( step4 );
+    PlumaApp.steps.push( step5 );
 
     app.addChildView( step1 );
     app.addChildView( step2 );
     app.addChildView( step3 );
     app.addChildView( step4 );
+    app.addChildView( step5 );
 
     // Start Leap trainer
     PlumaApp.LeapTrainer.start();
@@ -121,4 +135,4 @@ var PlumaAppMain = function( _, Backbone, $, SimpleStorage, PlumaApp ) {
     start: publicStart
   };
 
-}( _, Backbone, jQuery, SimpleStorage, PlumaApp );
+}( _, Backbone, jQuery, SimpleStorage, Points, PlumaApp );

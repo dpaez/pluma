@@ -24,11 +24,13 @@ html
     include ../BBTemplates/leapduinoContainer
     include ../BBTemplates/leapDuino
     include ../BBTemplates/testerContainer
+    include ../BBTemplates/metaphor
+    include ../BBTemplates/metaphorContainer
+    include ../BBTemplates/metaphorSlideshow
     include ../BBTemplates/sandbox
 
     // Vendor Scripts
     script(src='/vendor/jquery/dist/jquery.min.js')
-    script(src='/vendor/lawnchair/lib/lawnchair.js')
     script(src='/vendor/store2/dist/store2.js')
     script(src='/vendor/underscore/underscore.js')
     script(src='/vendor/lz-string/libs/lz-string-1.3.3.js')
@@ -40,6 +42,7 @@ html
     script(src='/vendor/high-resolution-recording.js')
     script(src='/vendor/cross-correlation.js')
     script(src='/app/utils/simpleStorage.js')
+    script(src='/vendor/points.js')
 
     // App Scripts
     script(src='/app/utils/templateCache.js')
@@ -50,15 +53,17 @@ html
     script(src='/app/views/step2.js')
     script(src='/app/views/step3.js')
     script(src='/app/views/step4.js')
+    script(src='/app/views/step5.js')
     script(src='/app/views/leapChildView.js')
     script(src='/app/views/gestureCreationView.js')
     script(src='/app/views/componentView.js')
     script(src='/app/views/componentConfigView.js')
     script(src='/app/views/duinoChildView.js')
     script(src='/app/views/leapduinoChildView.js')
+    script(src='/app/views/metaphorChildView.js')
+    script(src='/app/views/metaphorSlideshow.js')
     script(src='/app/views/sandboxChildView.js')
     script(src='/app/router/router.js')
-    script(src='/vendor/points.js')
     script(src='/app/trainer.js')
     script(src='/app/starter.js')
     script(src='/app/main.js')
