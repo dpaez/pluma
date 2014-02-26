@@ -11,13 +11,15 @@ PlumaApp.MetaphorView = PlumaApp.BaseView.extend({
   choosen: null,
 
   events: {
-    'click .metaphor-item': 'selectMetaphor'
+    'click .metaphor-item': 'selectMetaphor',
   },
 
   initialize: function(){
     this.listenTo( this, 'render', this.addMetaphors );
     //manually adding metaphors views...but later we should do this automatically with some discovering method.
+    this.metaphors = [];
     this.metaphors.push( PlumaApp.MetaphorSlideshowView );
+
   },
 
   onRender: function(){
@@ -38,7 +40,7 @@ PlumaApp.MetaphorView = PlumaApp.BaseView.extend({
 
     if ( !$list ){ return; }
 
-    tpl = _.template('<div data-idx="<%= metaphorIndex %>" class="metaphor-data metaphor-item"> <h2> <%= metaphorName %> </h2> | <p> <%= metaphorDesc %> </p> | <img alt="<%= metaphorName %>" src="<%= metaphorThumbnail %> "> </div>');
+    tpl = _.template('<div data-idx="<%= metaphorIndex %>" class="metaphor-data metaphor-item"> <h3> <%= metaphorName %> </h3> <p> <%= metaphorDesc %> </p> <img alt="<%= metaphorName %>" src="<%= metaphorThumbnail %> "> </div>');
 
     for ( var i=0; i < this.metaphors.length; i++ ){
       var mData = this.metaphors[ i ].prototype.getSummary();
@@ -59,10 +61,12 @@ PlumaApp.MetaphorView = PlumaApp.BaseView.extend({
 
     if (! $metaphor ){ return; }
 
+    this.$el.find( 'div.metaphor-item.metaphor-selected' ).removeClass( 'metaphor-selected' ); 
+
     PlumaApp.Metaphor = this.metaphors[ $metaphor.data('idx') ] || undefined;
 
-    // blur all other options...
-  }
+    $metaphor.addClass( 'metaphor-selected' );
 
+  },
 
 });

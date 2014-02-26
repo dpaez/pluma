@@ -39,8 +39,9 @@ PlumaApp.SandboxView = PlumaApp.BaseView.extend({
       return;
     }
 
-    var metaphor = new PlumaApp.Metaphor( {el:this.$el.find('#choosen_metaphor')} );
-
+    var metaphor = new PlumaApp.Metaphor( {el:$('#choosen_metaphor')} );
+    metaphor.render();
+    console.log( 'loading metaphor: ', metaphor );
 
   }
 

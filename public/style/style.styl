@@ -138,6 +138,7 @@ canvas
 // ******************
 // Step 2 (Duino)
 // ******************
+
 .duino-board
   float: right
   width: 360px
@@ -158,8 +159,9 @@ canvas
   -ms-filter: blur(3px)
 
 .user-gestures
-  position: absolute
   width: 100%
+  overflow-y: scroll
+  height: 56%
 
 .duino-comp, .user-gest
   width: 14%
@@ -221,29 +223,42 @@ canvas
 // Step 4
 // ******************
 
-// .fullscreen
-//   width: 95%
-//   margin-left: auto
-//   margin-right: auto
-//   height: 300px
-//   border-width: 5px
-//   border-style: solid
-//   border-color: yellow
+#metaphor-sandbox
+  height: 80%
+  overflow-y: scroll
 
-// .fullscreen:before
-//   position: absolute
-//   display: block
-//   content: ''
-//   box-sizing: border-box
-//   margin-top: -3.9px
-//   margin-left: -4.6px
-//   width: 90.3%
-//   height: 300.5px
-//   border-width: 5px
-//   border-style: dashed
-//   border-color: black
+.metaphor-item h3
+  font-style: italic  
 
-.fullscreen
+.metaphor-item p
+  margin-top: -0.8em
+  color: grey
+
+.metaphor-item img
+  display: block
+  margin-left: auto
+  margin-right: auto
+  margin-top: -1.5em
+
+.metaphor-item
+  width: 35%
+  display: block
+  margin: 0
+  padding: 0.2em
+  border-style: solid
+  border-color: green
+
+.metaphor-selected
+  background: rgba(39,62,84,0.82)
+  overflow: hidden
+  height: 100%
+  z-index: 2
+
+// ******************
+// Step 5
+// ******************
+
+.fullscreen 
   position: absolute
   top: 94px
   bottom: 94px
@@ -266,6 +281,36 @@ canvas
   font-size: 1.2em
   font-weight: bold
   color: silver
+
+#my_placeholder
+  position: absolute
+  top: 94px
+  bottom: 94px
+  right: 25px
+  left: 25px
+  width: 95%
+
+#my_placeholder span
+  font-size: 2em
+  font-weight: bold
+  color: green
+
+#my_placeholder img
+  height: 100%
+  display: block
+  margin-right: auto
+  margin-left: auto
+
+.go-right
+  position: absolute
+  top: 45%
+  right: 0.5em
+
+.go-left
+  position: absolute
+  top: 45%
+  left: 0.5em
+
 
 
 // ******************

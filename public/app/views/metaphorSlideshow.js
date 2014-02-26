@@ -6,9 +6,9 @@
 PlumaApp.MetaphorSlideshowView = PlumaApp.BaseView.extend({
   template: '#metaphor-slideshow-tpl',
 
-  imagesNames: [ '../../images/0.jpg', '../../images/1.jpg', '../../images/2.jpg', '../../images/3.jpg' ],
+  images: [ '../../images/0.jpg', '../../images/1.jpg', '../../images/2.jpg', '../../images/3.jpg' ],
 
-  images: [],
+  //images: [],
 
   currentImage: null,
 
@@ -21,19 +21,16 @@ PlumaApp.MetaphorSlideshowView = PlumaApp.BaseView.extend({
   thumbnail: '../../images/slideshow_view.png',
 
   events: {
-    'click .go_right' : 'goRight',
-    'click .go_left'  : 'goLeft'
+    'click .go-right' : 'goRight',
+    'click .go-left'  : 'goLeft'
   },
 
   initialize: function(){
     this.listenTo( this, 'render', this.showImage );
 
-    for (var i = 0; i < this.imagesNames.length; i++){
-      this.images[ i ] = document.createElement( 'image' );
-      this.images[ i ].src = this.imagesNames[i];
-    };
-
     // for (var i = 0; i < this.imagesNames.length; i++){
+    //   this.images[ i ] = document.createElement( 'image' );
+    //   this.images[ i ].src = this.imagesNames[i];
     // };
 
     this.currentImage = this.images[ 0 ];
@@ -59,14 +56,16 @@ PlumaApp.MetaphorSlideshowView = PlumaApp.BaseView.extend({
   },
 
   goRight: function(){
-    this.idx = ( this.idx == this.images.length ) ? 0 : ++this.idx;
+    console.log( 'going right...' );
+    this.idx = ( this.idx === this.images.length ) ? 0 : ++this.idx;
     this.currentImage = this.images[ this.idx ];
 
     this.showImage();
   },
 
   goLeft: function(){
-    this.idx = ( this.idx == 0 ) ? this.images.length - 1 : --this.idx;
+    console.log( 'going left...' );
+    this.idx = ( this.idx === 0 ) ? this.images.length - 1 : --this.idx;
     this.currentImage = this.images[ this.idx ];
 
     this.showImage();

@@ -23,7 +23,7 @@ canvas{display:block;padding-left:0;padding-right:0;margin-left:auto;margin-righ
 .gest-delete{float:right;bottom:0;right:0;color:#f00;font-weight:bold;cursor:pointer}
 .duino-board{float:right;width:360px;height:150px;background-image:url("../images/duino_board.png");background-repeat:no-repeat;background-size:50%;padding:.8em .2em;margin:0}
 .blur{width:367px;height:159px;filter:blur(3px);-webkit-filter:blur(3px);-moz-filter:blur(3px);-o-filter:blur(3px);-ms-filter:blur(3px)}
-.user-gestures{position:absolute;width:100%}
+.user-gestures{width:100%;overflow-y:scroll;height:56%}
 .duino-comp,.user-gest{width:14%;height:40px;border-width:1px;border-style:solid;border-color:#000;font-size:.8em;margin-top:.5em}
 .duino-comp{background-image:url("../images/protoboard.gif");background-size:256px;width:256px;height:92px}
 .user-gest{background-image:url("../images/five_finger_gesture.png");background-size:91%;background-repeat:no-repeat;width:136px;height:117px}
@@ -32,5 +32,16 @@ canvas{display:block;padding-left:0;padding-right:0;margin-left:auto;margin-righ
 .duino-status{width:15%;height:70px;border-width:2px;border-style:solid;border-color:#008000}
 .duino-comp.over{border-color:#00f}
 .duino-comp.linked,.test-gest.linked{border-color:#008000;border-width:2px}
+#metaphor-sandbox{height:80%;overflow-y:scroll}
+.metaphor-item h3{font-style:italic}
+.metaphor-item p{margin-top:-.8em;color:#808080}
+.metaphor-item img{display:block;margin-left:auto;margin-right:auto;margin-top:-1.5em}
+.metaphor-item{width:35%;display:block;margin:0;padding:.2em;border-style:solid;border-color:#008000}
+.metaphor-selected{background:rgba(39,62,84,0.82);overflow:hidden;height:100%;z-index:2}
 .fullscreen{position:absolute;top:94px;bottom:94px;right:25px;left:25px;width:95%;border-image-slice:20 51 26 66;border-image-width:13px 13px 13px 13px;border-image-outset:13px 13px 13px 13px;border-image-repeat:repeat repeat;border-image-source:url("http://img.photobucket.com/albums/v646/MusicAddict135/by_tile.png")}
 .fullscreen p{position:absolute;top:40%;left:25%;width:17%;height:5%;text-align:center;font-size:1.2em;font-weight:bold;color:#c0c0c0}
+#my_placeholder{position:absolute;top:94px;bottom:94px;right:25px;left:25px;width:95%}
+#my_placeholder span{font-size:2em;font-weight:bold;color:#008000}
+#my_placeholder img{height:100%;display:block;margin-right:auto;margin-left:auto}
+.go-right{position:absolute;top:45%;right:.5em}
+.go-left{position:absolute;top:45%;left:.5em}
