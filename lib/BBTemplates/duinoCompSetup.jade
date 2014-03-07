@@ -1,19 +1,20 @@
 script(type='text/template', id='duino-comp-setup-tpl')
   div.comp-config
-    h3
-      <%= componentType %> config
+    | <span class="duino-comp small <%= componentType %> right"></span>
+    h3 Configurar <%= componentType %>
     form
       div.options
-        p Options
+        p Opciones
         div.hashitem
-          input(class='key', type='text', placeholder='key')
-          input(class='value', type='text', placeholder='value')
+          input(class='key', type='text', placeholder='Pin')
+          input(class='value', type='text', placeholder='Valor')
         button(id='addKeyVal', type='button')
-          |  Add key/val
+          |  Agregar Pin/Valor
 
       div.actions
-        p Actions parameters
+        p Parametros
         input(id='params', type='text')
 
-      button(id='confirm-setup', value='start')
-        |  Start
+      div.center.config-end
+        button(id='confirm-setup', value='start')
+          |  Guardar

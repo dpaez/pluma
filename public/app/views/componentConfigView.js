@@ -75,10 +75,10 @@ PlumaApp.ComponentSetupView = Backbone.ModalView.extend({
   addKeyVal: function( e ){
     var $options = this.$(' .options ');
     var html = '<div class="hashitem">' +
-    '<input type="text" placeholder="key" class="key">' +
-    '<input type="text" placeholder="value" class="value">' +
+    '<input type="text" placeholder="Pin" class="key">' +
+    '<input type="text" placeholder="Valor" class="value">' +
     '</div>'+
-    '<button id="addKeyVal" type="button"> Add key/val</button>';
+    '<button id="addKeyVal" type="button"> Agregar Pin/Valor</button>';
 
     $options.find( '#addKeyVal' ).remove();
 
