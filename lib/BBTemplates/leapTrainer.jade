@@ -8,9 +8,10 @@ script(type='text/template', id='leap-trainer-tpl')
   canvas
 
   div.panel-small
-    button(class='start-trainer', name='start-trainer')
-      | New Gesture
+    //- button(class='start-trainer button button-border', name='start-trainer')
+    a(class='start-trainer button button-border-primary button-large', name='start-trainer')
+      | Nuevo Gesto
 
-  div.known-gestures
+  div.known-gestures.sidebox
     h3 Gestos Creados
     div.known-gestures-list

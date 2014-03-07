@@ -2,16 +2,17 @@ doctype html
 html(lang="es")
   head
     meta(name='viewport', content='width=device-width')
-    title Pluma Project
+    title Proyecto Pluma
     link(rel='stylesheet', href='/style/style.css')
+    link(rel='stylesheet', href='/style/buttons.css')
 
   body
     section#app-container
       block content
 
       div.footer
-        button(class='prev-step', name='prev-step') Back
-        button(class='next-step', name='next-step') Next
+        a(class='prev-step button button-border-action', name='prev-step') Back
+        a(class='next-step button button-border-action', name='next-step') Next
 
     // App Templates
     include ../BBTemplates/leapTrainer

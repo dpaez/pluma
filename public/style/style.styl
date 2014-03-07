@@ -1,12 +1,19 @@
 body
-  font: 100% "Lucida Grande", Helvetica, Arial, sans-serif
-  top: 0; left: 0; right: 0; bottom: 0;
+  font-size: 100%
+  font-family: "Consolas", "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", "Monaco", "Courier New", "Courier", monospace
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
   overflow-y: hidden
   overflow-x: hidden
-  //width: 100%
-  //height: 100%
   padding: 0
   margin: 0
+  background-image: url('../images/hoffman.png')
+  background-repeat: repeat
+  background-position: top left
+  background-attachment: scroll
+  color: #2B2B2B
 
 a
   color: #00B7FF
@@ -19,13 +26,14 @@ h2
   padding: 0 0.3125em
 
 canvas
+  position: absolute
+  right: 2%
+  left: 3%
   display: block
   padding-left: 0
   padding-right: 0
-  margin-left: auto
-  margin-right: auto
   border-style: solid
-  border-color: red
+  border-color: #336699
   border-width: 1px
 
 .step
@@ -33,6 +41,8 @@ canvas
   top: 94px
   bottom: 94px
   width: 100%
+  border-bottom: solid 2px #369
+  border-top: solid 2px #369
 
 .footer
   position: absolute
@@ -41,11 +51,11 @@ canvas
   right: 10px
   left: 10px
 
-
 .error
   visibility: hidden
   color: red
   font-style: italic
+
 
 // ******************
 // Common steps style
@@ -54,22 +64,33 @@ canvas
 .sandbox
   width: 95%
   height: 85%
-  border-width: 1px
-  border-style: solid
-  border-color: red
+
+.center
   margin-left: auto
   margin-right: auto
 
-.footer button
+.sidebox
+  position: absolute
+  height: 100%
+  width: 27%
+  right: 0
+  top: 0
+  border-left-style: solid
+  border-left-width: 2px
+  border-left-color: #336699
+  padding-left: 1.5%
+  overflow-y: scroll
+
+.footer a
   position: absolute
   display: inline-block
   width: 10%
   bottom: 10px
 
-.footer button.prev-step
+.footer .prev-step
   left: 35%
 
-.footer button.next-step
+.footer .next-step
   left: 55%
 
 
@@ -77,20 +98,17 @@ canvas
 // Step 1 (Leap)
 // ******************
 
-#step-one
-  width: 80%
+#gesture-sandbox
+  width: 73%
 
 .panel-small
   position: absolute
   width: 25%
   bottom: 4%
-  left: 37.5% // absoluteHalfScreenSize - (elementWidth/2)
-  border-top-width: 2px
-  border-top-style: solid
-  border-top-color: black
+  left: 18.5% // absoluteHalfScreenSize - (elementWidth/2)
 
-.panel-small button
-  width: 100%;
+.panel-small .start-trainer
+  width: 100%
 
 .panel-small .stop-trainer
   float: right
@@ -111,26 +129,22 @@ canvas
 .leap-msg > .warning
   color: orange
 
-.known-gestures
-  position: absolute
-  left: 100%
-  width: 100%
-  top: 14.25%
-
 .known-gestures p
-  padding-bottom: 3em
+  position: relative
+  right: -151px
 
 .gest-reset
-  left: 0
-  bottom: 0
+  position: relative
+  right: -151px
   color: gray
   font-weight: bold
   cursor: pointer
+  display: block
+  margin: 1em 0
 
 .gest-delete
-  float: right
-  bottom: 0
-  right: 0
+  position: relative
+  right: -151px
   color: red
   font-weight: bold
   cursor: pointer
@@ -160,6 +174,7 @@ canvas
 
 .user-gestures
   width: 100%
+  overflow: auto
   overflow-y: scroll
   height: 56%
 
@@ -173,13 +188,22 @@ canvas
   margin-top: 0.5em
 
 .duino-comp
-  background-image: url(../images/protoboard.gif)
-  background-size: 256px
-  width: 256px
-  height: 92px
+  background-size: 100%
+  background-repeat: no-repeat
+  height: 120px
+  width: 160px
+
+.duino-comp.lcd
+  background-image: url("../images/components/lcd.png")
+
+.duino-comp.servo
+  background-image: url("../images/components/servo.png")
+
+.duino-comp.vibro
+  background-image: url("../images/components/vibration_motor.jpg")
 
 .user-gest
-  background-image: url(../images/five_finger_gesture.png)
+  background-image: url("../images/five_finger_gesture.png")
   background-size: 91%
   background-repeat: no-repeat
   width: 136px
@@ -194,9 +218,20 @@ canvas
   zoom: 1 /* Fix for IE7 */
   *display: inline /* Fix for IE7 */
 
+.duino-comp span
+  position: relative
+  right: -190px
+  display: block
+  height: 1.3em
+  font-size: 1.2em
+  font-weight:bold
+
 .duino-comp button
-  text-align: center
-  float: right
+  position: relative
+  right: -190px
+  // text-align: center
+  // float: right
+
 
 .duino-status
   width: 15%
@@ -228,7 +263,7 @@ canvas
   overflow-y: scroll
 
 .metaphor-item h3
-  font-style: italic  
+  font-style: italic
 
 .metaphor-item p
   margin-top: -0.8em
@@ -258,7 +293,7 @@ canvas
 // Step 5
 // ******************
 
-.fullscreen 
+.fullscreen
   position: absolute
   top: 94px
   bottom: 94px

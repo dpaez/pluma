@@ -11,6 +11,7 @@ PlumaApp.ComponentView = PlumaApp.BaseView.extend({
 
   initialize: function( options ){
     this.component = options.component;
+    this.$el.addClass( this.component.componentType );
   },
 
   onRender: function(){

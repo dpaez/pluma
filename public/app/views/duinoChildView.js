@@ -16,9 +16,6 @@ PlumaApp.DuinoView = PlumaApp.BaseView.extend({
     PlumaApp.socket.emit( 'plumaduino:board_status' );
     PlumaApp.socket.on( 'plumaduino:board_ready', _.bind(this.boardReady, this) );
     PlumaApp.socket.on( 'plumaduino:component_ready', _.bind(this.componentReady, this) );
-    // DEPRECATED, moved to starter.js
-    //PlumaApp.socket.on( 'plumaduino:components_attached', _.bind(this.attachComponents, this) );
-
     this.listenTo( this, 'render', this.attachComponents );
   },
 
@@ -39,14 +36,14 @@ PlumaApp.DuinoView = PlumaApp.BaseView.extend({
   boardReady: function(){
     console.log( 'Arduino UNO is ready' );
     // make arduino status an object constant property
-    this.updateBoard( 'enabled' );
+    // this.updateBoard( 'enabled' );
   },
 
   attachComponents: function(){
     var components;
     components = PlumaApp.Storage.fetch( 'components' );
 
-    var $duinoComponents = this.$( '.duino-components' );
+    var $duinoComponents = this.$( '.user-components-list' );
     _.each(components, function( component ) {
       var view = new PlumaApp.ComponentView( { component: component } );
       $duinoComponents.append( view.render().$el );
