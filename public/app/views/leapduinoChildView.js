@@ -55,7 +55,7 @@ PlumaApp.LeapDuinoView = PlumaApp.BaseView.extend({
   attachComponents: function(){
     var $duinoComponents = this.$( '.duino-components' );
 
-    var tpl = _.template('<div class="duino-comp <%= componentType %>", data-id="<%= componentID %>", data-type="<%= componentType %>", dropzone="link string:text/plain"><span><%= componentName %> | <%= componentID %></span></div>');
+    var tpl = _.template('<div class="duino-comp <%= componentType %>", data-id="<%= componentID %>", data-type="<%= componentType %>", dropzone="link string:text/plain"><span class="title"><%= componentName %> | <%= componentID %></span></div>');
 
     PlumaApp.Storage.each(function( key, result ){
       if ( (result) && (result.type !== PlumaApp.TYPES['COMPONENT']) ){ return; }

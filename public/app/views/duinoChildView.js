@@ -10,6 +10,9 @@ PlumaApp.DuinoView = PlumaApp.BaseView.extend({
 
   template: '#duino-tpl',
 
+  events: {
+    'click .delete': 'deleteComponent'
+  },
 
   initialize: function(){
     // Pluma socket events
@@ -50,10 +53,10 @@ PlumaApp.DuinoView = PlumaApp.BaseView.extend({
 
     PlumaApp.Storage.each(function( key, result ){
       if ( (result) && (result.type !== PlumaApp.TYPES['COMPONENT']) ){ return; }
-      $userComponents.append( tpl({ 
+      $userComponents.append( tpl({
           componentID: PlumaApp.KEYS['COMPONENT']( result.data.options ),
           componentType: result.componentType,
-          componentName: result.componentType.toUpperCase(), 
+          componentName: result.componentType.toUpperCase(),
         })
       );
     });
@@ -63,10 +66,10 @@ PlumaApp.DuinoView = PlumaApp.BaseView.extend({
     var $userComponents = this.$( '.known-components-list' );
 
     var tpl = _.template('<div class="duino-comp <%= componentType %>", data-id="<%= componentID %>", data-type="<%= componentType %>"><span><%= componentName %> | <%= componentID %></span><span class="delete"> Delete </span></div>');
-    $userComponents.append( tpl({ 
+    $userComponents.append( tpl({
         componentID: comp.componentID,
         componentType: comp.type,
-        componentName: comp.type.toUpperCase(), 
+        componentName: comp.type.toUpperCase(),
       })
     );
   },
@@ -123,5 +126,19 @@ PlumaApp.DuinoView = PlumaApp.BaseView.extend({
         break;
     }
   },
+
+  deleteComponent: function( e ){
+    e.preventDefault();
+
+    var $compEl,
+      compId;
+
+    $compEl = $( e.currentTarget ).parent(); // to get the element with the data-event
+    compId = $compEl.data( 'id' );
+
+    PlumaApp.Storage.forward( 'remove', [compId] );
+    $compEl.remove();
+  }
+
 
 });

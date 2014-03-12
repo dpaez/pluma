@@ -69,7 +69,9 @@ PlumaApp.ComponentView = PlumaApp.BaseView.extend({
     // });
 
     // PlumaApp.socket.emit( 'plumaduino:create_component', data );
-  }
+  },
+
+
 
 
 });

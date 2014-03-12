@@ -35,7 +35,7 @@ PlumaApp.SandboxView = PlumaApp.BaseView.extend({
 
   loadMetaphor: function(){
     if ( (!PlumaApp.Metaphor) || (typeof PlumaApp.Metaphor === 'undefined') ){
-      console.Error( 'No metaphor selected.' );
+      console.error( 'No metaphor selected.' );
       return;
     }
 

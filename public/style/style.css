@@ -46,7 +46,7 @@ canvas{position:absolute;display:block;right:2%;left:3%;bottom:15%;padding-left:
 .config-end{width:100%;margin-top:.5em;padding:.4em 0;border-top:solid 2px #369}
 .duino-components,.user-gestures{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;width:50%;height:90%;padding-left:1.2em}
 .duino-comp.over{border-color:#00f}
-.duino-comp.linked{border-radius:2px;border-width:2px}
+.duino-comp.linked,.duino-comp.linked{border-radius:2px;border-width:2px}
 #leapduino-sandbox .duino-comp,#leapduino-sandbox .user-gest{margin-bottom:1.4em}
 #metaphor-sandbox{height:80%;overflow-y:scroll;overflow:auto}
 .metaphor-item h3{font-style:italic}

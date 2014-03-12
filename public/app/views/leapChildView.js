@@ -12,8 +12,8 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
 
   events: {
     'click .start-trainer':   'newGesture',
-    'click .gest-reset':      'resetGesture',
-    'click .gest-delete':     'deleteGesture'
+    'click .reset':      'resetGesture',
+    'click .delete':     'deleteGesture'
   },
 
   initialize: function(){
