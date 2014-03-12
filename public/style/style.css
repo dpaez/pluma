@@ -10,8 +10,9 @@ canvas{position:absolute;display:block;right:2%;left:3%;bottom:15%;padding-left:
 .left{float:left}
 .center{margin-left:auto;margin-right:auto;text-align:center}
 .clearAll{clear:both}
+.ghost{background-color:transparent;opacity:.4}
 .sandbox{width:95%;height:85%}
-.sidebox{position:absolute;height:100%;width:27%;right:0;top:0;border-left-style:solid;border-left-width:2px;border-left-color:#369;padding-left:1.5%;overflow:auto;overflow-y:scroll}
+.sidebox{position:absolute;height:100%;width:27%;right:0;top:0;border-left-style:solid;border-left-width:2px;border-left-color:#369;padding-left:1.5%;overflow-y:scroll;overflow:auto}
 .footer a{position:absolute;display:inline-block;width:10%;bottom:10px}
 .footer .prev-step{left:35%}
 .footer .next-step{left:55%}
@@ -27,7 +28,7 @@ canvas{position:absolute;display:block;right:2%;left:3%;bottom:15%;padding-left:
 .gest-delete{position:relative;right:-151px;color:#f00;font-weight:bold;cursor:pointer}
 .duino-board{float:right;width:360px;height:150px;background-image:url("../images/duino_board.png");background-repeat:no-repeat;background-size:50%;padding:.8em .2em;margin:0}
 .blur{width:367px;height:159px;filter:blur(3px);-webkit-filter:blur(3px);-moz-filter:blur(3px);-o-filter:blur(3px);-ms-filter:blur(3px)}
-.user-gestures{width:100%;overflow:auto;overflow-y:scroll;height:56%}
+.user-gestures{width:100%;overflow-y:scroll;overflow:auto;height:56%}
 .duino-comp,.user-gest{width:14%;height:40px;border-width:1px;border-style:solid;border-color:#000;font-size:.8em;margin-top:.5em}
 .duino-comp{background-size:100%;background-repeat:no-repeat;height:120px;width:160px}
 .duino-comp.lcd{background-image:url("../images/components/lcd.png")}
@@ -35,6 +36,7 @@ canvas{position:absolute;display:block;right:2%;left:3%;bottom:15%;padding-left:
 .duino-comp.vibro{background-image:url("../images/components/vibration_motor.jpg")}
 .duino-comp.small{background-size:100%;background-repeat:no-repeat;height:80px;width:100px}
 .user-gest{background-image:url("../images/five_finger_gesture.png");background-size:91%;background-repeat:no-repeat;width:136px;height:117px}
+.user-gest:before{content:"";width:100%;height:100%;background-color:transparent}
 .duino-comp p{text-align:left;display:inline-block;margin:0;padding:.2em;vertical-align:top;zoom:1;*display:inline;}
 .duino-comp span{position:relative;right:-190px;display:block;height:1.3em;font-size:1.2em;font-weight:bold}
 .duino-comp button{position:relative;right:-190px}
@@ -42,10 +44,11 @@ canvas{position:absolute;display:block;right:2%;left:3%;bottom:15%;padding-left:
 .comp-config{padding:.8em}
 .comp-config .options{clear:right}
 .config-end{width:100%;margin-top:.5em;padding:.4em 0;border-top:solid 2px #369}
-.duino-components,.user-gestures{width:50%;height:90%}
+.duino-components,.user-gestures{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;width:50%;height:90%;padding-left:1.2em}
 .duino-comp.over{border-color:#00f}
-.duino-comp.linked,.test-gest.linked{border-color:#008000;border-width:2px}
-#metaphor-sandbox{height:80%;overflow:auto;overflow-y:scroll}
+.duino-comp.linked,.duino-comp.linked{border-radius:2px;border-width:2px}
+#leapduino-sandbox .duino-comp,#leapduino-sandbox .user-gest{margin-bottom:1.4em}
+#metaphor-sandbox{height:80%;overflow-y:scroll;overflow:auto}
 .metaphor-item h3{font-style:italic}
 .metaphor-item p{margin-top:-.8em;color:#808080}
 .metaphor-item img{display:block;margin-left:auto;margin-right:auto;margin-top:-1.5em}

@@ -69,6 +69,10 @@ canvas
 .clearAll
   clear: both
 
+.ghost
+  background-color: transparent
+  opacity: 0.4
+
 // ******************
 // Common steps style
 // ******************
@@ -87,8 +91,8 @@ canvas
   border-left-width: 2px
   border-left-color: #336699
   padding-left: 1.5%
-  overflow: auto
   overflow-y: scroll
+  overflow: auto
 
 .footer a
   position: absolute
@@ -183,8 +187,8 @@ canvas
 
 .user-gestures
   width: 100%
-  overflow: auto
   overflow-y: scroll
+  overflow: auto
   height: 56%
 
 .duino-comp, .user-gest
@@ -224,6 +228,12 @@ canvas
   width: 136px
   height: 117px
 
+.user-gest:before
+  content:""
+  width:100%
+  height:100%
+  background-color:transparent
+
 .duino-comp p
   text-align: left
   display: inline-block
@@ -247,7 +257,6 @@ canvas
   // text-align: center
   // float: right
 
-
 .duino-status
   width: 15%
   height: 70px
@@ -268,21 +277,27 @@ canvas
   border-top: solid 2px #336699
 
 
-
 // ******************
 // Step 3
 // ******************
 
 .duino-components, .user-gestures
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;
   width: 50%
   height: 90%
+  padding-left: 1.2em;
 
 .duino-comp.over
-  border-color: blue;
+  border-color: blue
 
-.duino-comp.linked, .test-gest.linked
-  border-color: green
-  border-width: 2px;
+.duino-comp.linked, .duino-comp.linked
+  border-radius: 2px
+  border-width: 2px
+
+#leapduino-sandbox .duino-comp, #leapduino-sandbox .user-gest
+  margin-bottom: 1.4em
 
 
 // ******************
@@ -291,8 +306,8 @@ canvas
 
 #metaphor-sandbox
   height: 80%
-  overflow: auto
   overflow-y: scroll
+  overflow: auto
 
 .metaphor-item h3
   font-style: italic
