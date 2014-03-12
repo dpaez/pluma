@@ -146,7 +146,7 @@ canvas
   position: relative
   right: -151px
 
-.gest-reset
+.reset
   position: relative
   right: -151px
   color: gray
@@ -155,7 +155,7 @@ canvas
   display: block
   margin: 1em 0
 
-.gest-delete
+.delete
   position: relative
   right: -151px
   color: red
@@ -228,12 +228,6 @@ canvas
   width: 136px
   height: 117px
 
-.user-gest:before
-  content:""
-  width:100%
-  height:100%
-  background-color:transparent
-
 .duino-comp p
   text-align: left
   display: inline-block
@@ -243,13 +237,16 @@ canvas
   zoom: 1 /* Fix for IE7 */
   *display: inline /* Fix for IE7 */
 
-.duino-comp span
+.duino-comp span.title
   position: relative
-  right: -190px
+  right: -151px
   display: block
   height: 1.3em
   font-size: 1.2em
   font-weight:bold
+
+.duino-comp span.delete
+  right: -119px
 
 .duino-comp button
   position: relative
@@ -282,12 +279,12 @@ canvas
 // ******************
 
 .duino-components, .user-gestures
-  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box   /* Firefox, other Gecko */
+  box-sizing: border-box
   width: 50%
   height: 90%
-  padding-left: 1.2em;
+  padding-left: 1.2em
 
 .duino-comp.over
   border-color: blue

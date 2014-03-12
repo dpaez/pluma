@@ -33,7 +33,6 @@ PlumaApp.ComponentView = PlumaApp.BaseView.extend({
       showCloseButton:false
     });
     modalView.render().showModal();
-
   },
 
   enableComponent: function( e ){

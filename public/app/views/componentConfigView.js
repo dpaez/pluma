@@ -9,7 +9,6 @@ PlumaApp.ComponentSetupView = Backbone.ModalView.extend({
     'click #addKeyVal' : 'addKeyVal'
   },
 
-
   initialize: function( options ){
     this.component = options.component || { componentType: '' };
   },
@@ -68,7 +67,7 @@ PlumaApp.ComponentSetupView = Backbone.ModalView.extend({
     );
 
     PlumaApp.socket.emit( 'plumaduino:create_component', componentData );
-
+    PlumaApp.trigger( 'plumaduino:create_component', componentData );
     this.hideModal();
   },
 

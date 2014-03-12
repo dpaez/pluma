@@ -142,7 +142,7 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
 
   addCreatedGestures: function(){
     var $userGestures = this.$( '.known-gestures-list' );
-    var tpl = _.template('<div data-event="<%= gestName %>", class="user-gest"> <p> <%= gestName %> </p> <span class="gest-reset"> Reset </span> <span class="gest-delete"> Delete </span> </div>');
+    var tpl = _.template('<div data-event="<%= gestName %>", class="user-gest"> <p> <%= gestName %> </p> <span class="reset"> Reset </span> <span class="delete"> Delete </span> </div>');
     $userGestures.empty();
 
     PlumaApp.Storage.each(function( key, result ){

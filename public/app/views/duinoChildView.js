@@ -16,7 +16,10 @@ PlumaApp.DuinoView = PlumaApp.BaseView.extend({
     PlumaApp.socket.emit( 'plumaduino:board_status' );
     PlumaApp.socket.on( 'plumaduino:board_ready', _.bind(this.boardReady, this) );
     PlumaApp.socket.on( 'plumaduino:component_ready', _.bind(this.componentReady, this) );
+    PlumaApp.socket.on( 'plumaduino:create_component', _.bind(this.addComponent, this) );
+    this.listenTo( PlumaApp, 'plumaduino:create_component', this.addComponent );
     this.listenTo( this, 'render', this.attachComponents );
+    this.listenTo( this, 'render', this.addComponents );
   },
 
   onRender: function(){
@@ -37,6 +40,35 @@ PlumaApp.DuinoView = PlumaApp.BaseView.extend({
     console.log( 'Arduino UNO is ready' );
     // make arduino status an object constant property
     // this.updateBoard( 'enabled' );
+  },
+
+  addComponents: function(){
+    // add saved components
+    var $userComponents = this.$( '.known-components-list' );
+
+    var tpl = _.template('<div class="duino-comp <%= componentType %>", data-id="<%= componentID %>", data-type="<%= componentType %>"><span class="title"><%= componentName %> | <%= componentID %></span><span class="delete"> Delete </span></div>');
+
+    PlumaApp.Storage.each(function( key, result ){
+      if ( (result) && (result.type !== PlumaApp.TYPES['COMPONENT']) ){ return; }
+      $userComponents.append( tpl({ 
+          componentID: PlumaApp.KEYS['COMPONENT']( result.data.options ),
+          componentType: result.componentType,
+          componentName: result.componentType.toUpperCase(), 
+        })
+      );
+    });
+  },
+
+  addComponent: function( comp ){
+    var $userComponents = this.$( '.known-components-list' );
+
+    var tpl = _.template('<div class="duino-comp <%= componentType %>", data-id="<%= componentID %>", data-type="<%= componentType %>"><span><%= componentName %> | <%= componentID %></span><span class="delete"> Delete </span></div>');
+    $userComponents.append( tpl({ 
+        componentID: comp.componentID,
+        componentType: comp.type,
+        componentName: comp.type.toUpperCase(), 
+      })
+    );
   },
 
   attachComponents: function(){
