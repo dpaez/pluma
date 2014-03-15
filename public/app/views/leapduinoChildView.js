@@ -137,6 +137,14 @@ PlumaApp.LeapDuinoView = PlumaApp.BaseView.extend({
     $targetDrag.addClass( 'linked' );
 
     console.log( 'Binding gesture with component: done.' );
+
+    // Launching leapduino setup modal
+    var leapduinoModalView = new PlumaApp.LeapDuinoConfigView({
+      gesture: gestureName,
+      component: result,
+      showCloseButton:false
+    });
+    leapduinoModalView.render().showModal();
     return false;
   },
 

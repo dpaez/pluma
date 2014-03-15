@@ -1,0 +1,43 @@
+script(type='text/template', id='leapduino-setup-tpl')
+  div.header
+    div.right
+      <span class="duino-comp <%= component.componentType %> right"></span>
+
+    div.user-gest
+      <span class=""><%= gesture.gesture %></span>
+
+  div.config-central.clearAll
+    form
+      div.item-labels
+        span.item-row
+          label(for='instant-filter') INSTANTANEO
+        span.item-row
+          label(for='power-filter') SUAVE
+        span.item-row
+          label(for='discrete-filter') DISCRETO
+
+      div.item-config.center
+        span.item-row
+          input(type='range', id='instant-filter', min='0', max='5', step='1', value='2')
+        span.item-row
+          input(type='range', id='power-filter', min='0', max='5', step='1', value='2')
+        span.item-row
+          input(type='radio', name='discrete-continous-filter', id='discrete-filter', value='')
+          input(type='radio', name='discrete-continous-filter', id='continous-filter', value='')
+
+      div.item-labels
+        span.item-row
+          label(for='instant-filter') DIFERIDO
+        span.item-row
+          label(for='power-filter') INTENSO
+        span.item-row
+          label(for='continous-filter') CONTINUO
+
+      div.center.config-end
+        input(class='button button-border-primary button-large', type='submit', value='Aplicar')
+
+
+
+
+
+
