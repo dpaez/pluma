@@ -51,11 +51,12 @@ canvas{position:absolute;display:block;right:2%;left:3%;bottom:15%;padding-left:
 .duino-comp.linked,.user-gest.linked{border-radius:2px;border-width:2px}
 #leapduino-sandbox .duino-comp,#leapduino-sandbox .user-gest{margin-bottom:1.4em}
 .config-central{margin-left:auto;margin-right:auto;padding:.5em}
-.config-central .item-labels,.config-central .item-config{width:33%;display:inline-block;vertical-align:top}
+.config-central .item-labels,.config-central .item-config{display:inline-block;vertical-align:top}
 .config-central .item-labels:first-of-type{text-align:right}
 .config-central .item-labels:last-of-type{text-align:left}
-.config-central .item-config input{width:93%}
+.config-central .item-config input{width:74%}
 .item-row{display:block;height:2em;margin:0 15px}
+.item-row span{vertical-align:top;width:1em}
 .item-row input[type="radio"]{width:16%}
 .item-row input[type="radio"]:first-of-type{float:left}
 .item-row input[type="radio"]:last-of-type{float:right}

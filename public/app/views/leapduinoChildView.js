@@ -141,7 +141,7 @@ PlumaApp.LeapDuinoView = PlumaApp.BaseView.extend({
     // Launching leapduino setup modal
     var leapduinoModalView = new PlumaApp.LeapDuinoConfigView({
       gesture: gestureName,
-      component: result,
+      component: componentID,
       showCloseButton:false
     });
     leapduinoModalView.render().showModal();

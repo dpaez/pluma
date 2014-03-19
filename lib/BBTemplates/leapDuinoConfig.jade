@@ -18,11 +18,15 @@ script(type='text/template', id='leapduino-setup-tpl')
 
       div.item-config.center
         span.item-row
-          input(type='range', id='instant-filter', min='0', max='5', step='1', value='2')
+          span.left 0
+          input(type='range', id='instant-filter', min='0', max='5', step='0.5', value='2.5')
+          span.right 5
         span.item-row
-          input(type='range', id='power-filter', min='0', max='5', step='1', value='2')
+          span.left 0
+          input(type='range', id='power-filter', min='0', max='10', step='1', value='5')
+          span.right 10
         span.item-row
-          input(type='radio', name='discrete-continous-filter', id='discrete-filter', value='')
+          input(type='radio', name='discrete-continous-filter', id='discrete-filter', value='', checked)
           input(type='radio', name='discrete-continous-filter', id='continous-filter', value='')
 
       div.item-labels
@@ -34,7 +38,7 @@ script(type='text/template', id='leapduino-setup-tpl')
           label(for='continous-filter') CONTINUO
 
       div.center.config-end
-        input(class='button button-border-primary button-large', type='submit', value='Aplicar')
+        input(id='confirmLeapDuinoConfig', class='button button-border-primary button-large', type='submit', value='Aplicar')
 
 
 

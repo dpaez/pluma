@@ -19,6 +19,7 @@ var PlumaAppMain = function( _, Backbone, $, SimpleStorage, Points, PlumaApp ) {
       'GESTURE' : 0,
       'COMPONENT': 1,
       'CONFIG' : 2,
+      'CONFIG_LEAPDUINO': 3
     };
 
     PlumaApp.SOCKETS = {
@@ -32,7 +33,7 @@ var PlumaAppMain = function( _, Backbone, $, SimpleStorage, Points, PlumaApp ) {
     // Create a key generator
     PlumaApp.KEYS = {
       'COMPONENT': function( options, prefix ){
-        if (!options){ return; }
+        if ( !options ){ return; }
         prefix = prefix || 'key_';
         var id = undefined;
         if ( options.pin ){ id = prefix + options.pin.toString() };

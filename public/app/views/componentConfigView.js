@@ -62,7 +62,7 @@ PlumaApp.ComponentSetupView = Backbone.ModalView.extend({
       {
         data: data,
         componentType: this.component.componentType,
-        type: PlumaApp.TYPES['COMPONENT']
+        type: PlumaApp.TYPES[ 'COMPONENT' ]
       }
     );
 
