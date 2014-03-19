@@ -19,6 +19,7 @@ PlumaApp.LeapDuinoView = PlumaApp.BaseView.extend({
     this.listenTo( this, 'render', this.addGestures );
     this.listenTo( this, 'render', this.attachComponents );
     this.listenTo( this, 'render', this.cleanGesturesBindings );
+    this.listenTo( PlumaApp, 'plumaduino:update_component', this.createLink );
   },
 
   onRender: function(){
@@ -114,29 +115,28 @@ PlumaApp.LeapDuinoView = PlumaApp.BaseView.extend({
 
     $comp.removeClass( 'over' );
 
-    result = PlumaApp.Storage.fetch( componentID );
-    params = result.data.params;
+    // result = PlumaApp.Storage.fetch( componentID );
+    // params = result.data.params;
 
-    PlumaApp.trainer.on( gestureName, function(){
-      console.log( 'gesture-component binding triggered: %s %s', gestureName, componentID );
-      PlumaApp.socket.emit( 'plumaduino:component_do', {
-        componentID: componentID,
-        componentType: componentType,
-        action: action,
-        params: params
-      } );
-      PlumaApp.trigger( 'plumaleap:gesture-component-fire', {gestureName: gestureName, component: componentID} );
-    });
+    // PlumaApp.trainer.on( gestureName, function(){
+    //   console.log( 'gesture-component binding triggered: %s %s', gestureName, componentID );
+    //   PlumaApp.socket.emit( 'plumaduino:component_do', {
+    //     componentID: componentID,
+    //     componentType: componentType,
+    //     action: action,
+    //     params: params
+    //   } );
+    //   PlumaApp.trigger( 'plumaleap:gesture-component-fire', {gestureName: gestureName, component: componentID} );
+    // });
 
-    $targetDrag = this.$el.find("[data-event='" + gestureName + "']");
-    newColor = this.getRandomColor();
-    this.addBoxShadow( $comp, newColor );
-    this.addBoxShadow( $targetDrag, newColor );
+    // $targetDrag = this.$el.find("[data-event='" + gestureName + "']");
+    // newColor = this.getRandomColor();
+    // this.addBoxShadow( $comp, newColor );
+    // this.addBoxShadow( $targetDrag, newColor );
 
-    $comp.addClass( 'linked' );
-    $targetDrag.addClass( 'linked' );
+    // $comp.addClass( 'linked' );
+    // $targetDrag.addClass( 'linked' );
 
-    console.log( 'Binding gesture with component: done.' );
 
     // Launching leapduino setup modal
     var leapduinoModalView = new PlumaApp.LeapDuinoConfigView({
@@ -146,6 +146,55 @@ PlumaApp.LeapDuinoView = PlumaApp.BaseView.extend({
     });
     leapduinoModalView.render().showModal();
     return false;
+  },
+
+  createLink: function( data ){
+    if ( !data ){
+      throw "data must be an object.";
+    }
+
+    var gestureName,
+      componentID,
+      componentType,
+      action,
+      $gestureElem,
+      $compElem,
+      newColor,
+      result,
+      params;
+
+    gestureName = data.gesture;
+    componentID = data.componentID;
+    componentType =  data.componentType;
+    action = data.action || 'defaultAction';
+    result = PlumaApp.Storage.fetch( componentID );
+    params = result.data.params;
+
+    $gestureElem = this.$el.find("[data-event='" + gestureName + "']");
+    $compElem = this.$el.find("[data-id='" + componentID + "']");
+    newColor = this.getRandomColor();
+    this.addBoxShadow( $compElem, newColor );
+    this.addBoxShadow( $gestureElem, newColor );
+
+    $compElem.addClass( 'linked' );
+    $gestureElem.addClass( 'linked' );
+
+    PlumaApp.trainer.on( gestureName, function(){
+      console.log( 'gesture-component binding triggered: %s %s', gestureName, componentID );
+
+      PlumaApp.socket.emit( 'plumaduino:component_do', {
+        componentID: componentID,
+        componentType: componentType,
+        action: action,
+        params: params
+      });
+
+      PlumaApp.trigger( 'plumaleap:gesture-component-fire', {
+        gestureName: gestureName,
+        component: componentID
+      });
+    });
+    console.log( 'Binding gesture with component: done.' );
   },
 
   addBoxShadow: function( element, color ){

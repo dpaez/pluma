@@ -88,7 +88,7 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
       pack;
 
     if ( gestureJSON ){
-      pack = LZString.compress( gestureJSON );
+      pack = LZString.compressToUTF16( gestureJSON );
     }
 
     var data = {
@@ -150,7 +150,11 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
 
         $userGestures.append( tpl({ gestName: result.data.name }) );
 
-        PlumaApp.trainer.fromJSON( LZString.decompress(result.data.json) );
+        var decompressed = LZString.decompressFromUTF16(result.data.json);
+
+        if ( ( decompressed ) && ( typeof decompressed === 'string' ) ){
+          PlumaApp.trainer.fromJSON( decompressed );
+        }
       }
     });
   },

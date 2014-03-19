@@ -54,6 +54,7 @@ PlumaApp.LeapDuinoConfigView = Backbone.ModalView.extend({
     PlumaApp.trigger( 'plumaduino:update_component', gestureComponentData );
 
     this.hideModal();
+
   },
 
   getFormValues: function(){
