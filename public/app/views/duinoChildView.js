@@ -11,7 +11,8 @@ PlumaApp.DuinoView = PlumaApp.BaseView.extend({
   template: '#duino-tpl',
 
   events: {
-    'click .delete': 'deleteComponent'
+    'click .delete': 'deleteComponent',
+    'click .enable': 'enableComponent'
   },
 
   initialize: function(){
@@ -49,7 +50,7 @@ PlumaApp.DuinoView = PlumaApp.BaseView.extend({
     // add saved components
     var $userComponents = this.$( '.known-components-list' );
 
-    var tpl = _.template('<div class="duino-comp <%= componentType %>", data-id="<%= componentID %>", data-type="<%= componentType %>"><span class="title"><%= componentName %> | <%= componentID %></span><span class="delete"> Delete </span></div>');
+    var tpl = _.template('<div class="duino-comp <%= componentType %>", data-id="<%= componentID %>", data-type="<%= componentType %>"><span class="title"><%= componentName %> | <%= componentID %></span><span class="delete"> Delete </span> <span class="enable button button-small button-border-action"> Activar </span> </div>');
 
     PlumaApp.Storage.each(function( key, result ){
       if ( (result) && (result.type !== PlumaApp.TYPES['COMPONENT']) ){ return; }
@@ -138,6 +139,30 @@ PlumaApp.DuinoView = PlumaApp.BaseView.extend({
 
     PlumaApp.Storage.forward( 'remove', [compId] );
     $compEl.remove();
+  },
+
+  enableComponent: function( e ){
+    e.preventDefault();
+
+    var $compEl,
+      compId,
+      component,
+      componentData;
+
+    $compEl = $( e.currentTarget ).parent(); // to get the element with the data-event
+    compId = $compEl.data( 'id' );
+
+    component = PlumaApp.Storage.fetch( compId );
+
+    if ( component ){
+      componentData = {};
+      componentData.componentID = PlumaApp.KEYS['COMPONENT']( component.data.options );
+      componentData.type = component.componentType;
+      componentData.options = component.data.options;
+      PlumaApp.socket.emit( 'plumaduino:create_component', componentData );
+    }
+
+
   }
 
 

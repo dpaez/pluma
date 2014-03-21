@@ -38,9 +38,11 @@ canvas{position:absolute;display:block;right:2%;left:3%;bottom:15%;padding-left:
 .duino-comp.motor{background-image:url("../images/components/128/motor.png")}
 .duino-comp.small{background-size:100%;background-repeat:no-repeat;height:80px;width:100px}
 .user-gest{background-image:url("../images/five_finger_gesture.png");background-size:91%;background-repeat:no-repeat;width:136px;height:117px}
+.user-gest > p{font-size:1.2em;font-weight:bold}
 .duino-comp p{text-align:left;display:inline-block;margin:0;padding:.2em;vertical-align:top;zoom:1;*display:inline;}
 .duino-comp span.title{position:relative;right:-151px;display:block;height:1.3em;font-size:1.2em;font-weight:bold}
 .duino-comp span.delete{right:-119px}
+.duino-comp span.enable{position:relative;right:-150px}
 .duino-comp button{position:relative;right:-190px}
 .duino-status{width:15%;height:70px;border-width:2px;border-style:solid;border-color:#008000}
 .comp-config{padding:.8em}
@@ -56,7 +58,7 @@ canvas{position:absolute;display:block;right:2%;left:3%;bottom:15%;padding-left:
 .config-central .item-labels:last-of-type{text-align:left}
 .config-central .item-config input{width:74%}
 .item-row{display:block;height:2em;margin:0 15px}
-.item-row span{vertical-align:top;width:1em}
+.item-row span{display:inline-block;vertical-align:top}
 .item-row input[type="radio"]{width:16%}
 .item-row input[type="radio"]:first-of-type{float:left}
 .item-row input[type="radio"]:last-of-type{float:right}
