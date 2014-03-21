@@ -66,7 +66,7 @@ PlumaApp.DuinoView = PlumaApp.BaseView.extend({
   addComponent: function( comp ){
     var $userComponents = this.$( '.known-components-list' );
 
-    var tpl = _.template('<div class="duino-comp <%= componentType %>", data-id="<%= componentID %>", data-type="<%= componentType %>"><span><%= componentName %> | <%= componentID %></span><span class="delete"> Delete </span></div>');
+    var tpl = _.template('<div class="duino-comp <%= componentType %>", data-id="<%= componentID %>", data-type="<%= componentType %>"><span class="title"><%= componentName %> | <%= componentID %></span><span class="delete"> Delete </span></div>');
     $userComponents.append( tpl({
         componentID: comp.componentID,
         componentType: comp.type,

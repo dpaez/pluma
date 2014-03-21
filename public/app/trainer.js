@@ -32,13 +32,16 @@ PlumaApp.LeapTrainer = function( _, Backbone, Leap, LeapTrainer ) {
       controller: PlumaApp.controller,
       //maxRecordingVelocity: 30,
       trainingGestures: 2,
-      minGestureFrames: 5,
-      convolutionFactor: 0,
-      hitThreshold: 0.65,
-      downtime: 1000,
+      //minGestureFrames: 5,
+      //convolutionFactor: 0,
+      hitThreshold: 0.55,
+      downtime: 1500,
     });
 
+    // does not make a disctintion btw vector orientation
     _modifyController( 'HRController' );
+
+    // More precise but make really difficult to get 2 gestures recognized 
     //_modifyController( 'CorrelationController' );
 
     // Specific module events

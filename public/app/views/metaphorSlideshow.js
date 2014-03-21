@@ -77,6 +77,11 @@ PlumaApp.MetaphorSlideshowView = PlumaApp.BaseView.extend({
       'description':  this.description,
       'thumbnail':    this.thumbnail
     };
+  },
+
+  defaultAction: function(){
+    this.goLeft();
   }
+
 
 });

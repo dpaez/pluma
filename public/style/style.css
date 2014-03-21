@@ -21,8 +21,8 @@ canvas{position:absolute;display:block;right:2%;left:3%;bottom:15%;padding-left:
 .panel-small{position:absolute;width:25%;bottom:4%;left:18.5%}
 .panel-small .start-trainer{width:100%}
 .panel-small .stop-trainer{float:right}
-.trainer-msg{text-align:center;font-size:2em;color:#808080}
-.leap-msg{padding-bottom:.4em;text-align:center;height:1em;font-size:.7em;font-weight:bold;color:#008000}
+.trainer-msg{position:relative;text-align:center;height:2em;font-size:1.4em;top:-14px;color:#808080}
+.leap-msg{text-align:center;height:1em;font-size:.7em;font-weight:bold;color:#008000}
 .leap-msg > .warning{color:#ffa500}
 .known-gestures p{position:relative;right:-151px}
 .reset{position:relative;right:-151px;color:#808080;font-weight:bold;cursor:pointer;display:block;margin:1em 0}
