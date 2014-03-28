@@ -21,7 +21,7 @@ PlumaApp.LeapTrainer = function( _, Backbone, Leap, LeapTrainer ) {
         PlumaApp.trainer[field] = func;
       }
     }
-  };
+  }
 
   function _init(){
     // New Leap controller instance
@@ -29,25 +29,23 @@ PlumaApp.LeapTrainer = function( _, Backbone, Leap, LeapTrainer ) {
 
     // Start leap trainer
     PlumaApp.trainer = new LeapTrainer.Controller({
-      controller: PlumaApp.controller,
-      //maxRecordingVelocity: 30,
-      trainingGestures: 2,
-      //minGestureFrames: 5,
-      //convolutionFactor: 0,
-      hitThreshold: 0.55,
-      downtime: 1500,
+      controller          : PlumaApp.controller,
+      // Specific config below - be sure cc strategy should have this config, consider create a separate cc st with this setup
+      trainingGestures    : 1,
+      hitThreshold        : 0.2,
+      convolutionFactor   : 3,
+      downtime            : 1500,
     });
 
-    // does not make a disctintion btw vector orientation
-    _modifyController( 'HRController' );
+    // Selected strategy: cross correlation
+    _modifyController( 'CorrelationController' );
 
-    // More precise but make really difficult to get 2 gestures recognized 
-    //_modifyController( 'CorrelationController' );
+    //_modifyController( 'HRController' );
 
     // Specific module events
     PlumaApp.on({
-      'plumaleap:create': _train,
-      'plumaleap:reset': _reset,
+       'plumaleap:create': _train,
+       'plumaleap:reset':  _reset,
     });
 
     // Leap Trainer Events
@@ -64,15 +62,18 @@ PlumaApp.LeapTrainer = function( _, Backbone, Leap, LeapTrainer ) {
     PlumaApp.controller.on( 'frame', _leapFrame );
 
     PlumaApp.controller.connect();
-  };
+  }
 
   function _train( gestureName ){
     PlumaApp.trainer.create( gestureName );
-  };
+  }
 
   function _reset( gestureName ){
-    PlumaApp.trainer.retrain( gestureName );
-  };
+    var status = PlumaApp.trainer.retrain( gestureName );
+    if ( !status ){
+      console.error( 'Retrain failed, gestureName: %s is unknown', gestureName );
+    }
+  }
 
   /*
   Leap Motion section
@@ -80,15 +81,15 @@ PlumaApp.LeapTrainer = function( _, Backbone, Leap, LeapTrainer ) {
 
   function _leapConnected(){
     PlumaApp.trigger( 'plumaleap:leap-connected' );
-  };
+  }
 
   function _leapDisconnected(){
     PlumaApp.trigger( 'plumaleap:leap-disconnected' );
-  };
+  }
 
   function _leapReady(){
     PlumaApp.trigger( 'plumaleap:leap-ready' );
-  };
+  }
 
   function _leapFrame( frame ){
     i++;
@@ -99,7 +100,7 @@ PlumaApp.LeapTrainer = function( _, Backbone, Leap, LeapTrainer ) {
       }
       i = 0;
     }
-  };
+  }
 
   /*
   Leap Training section
@@ -107,17 +108,17 @@ PlumaApp.LeapTrainer = function( _, Backbone, Leap, LeapTrainer ) {
 
   function _trainingCountdown( countdown ){
     PlumaApp.trigger( 'plumaleap:training-countdown', countdown );
-  };
+  }
 
   function _trainingStarted( gestureName ){
     console.log('Training new gesture: ', gestureName);
     PlumaApp.trigger( 'plumaleap:training-started' );
-  };
+  }
 
   function _trainingGestureRecognized( gestureName, trainingGestures ){
     var remaining = ( trainingGestures - trainingGestures.length );
     PlumaApp.trigger( 'plumaleap:training-gest-recognized' );
-  };
+  }
 
   function _trainingComplete( gestureName, trainingGestures ){
     console.log( 'Training gesture complete for: ', gestureName );
@@ -125,22 +126,22 @@ PlumaApp.LeapTrainer = function( _, Backbone, Leap, LeapTrainer ) {
     PlumaApp.trainer.distribute( trainingGestures );
     var gestureJSON = PlumaApp.trainer.toJSON( gestureName );
     PlumaApp.trigger( 'plumaleap:training-complete', gestureName, gestureJSON );
-  };
+  }
 
   function _gestureRecognized( hit, gestureName ){
     console.log('Gesture recognized: %s with confidence: %d', gestureName, hit);
     PlumaApp.trigger( 'plumaleap:gesture-recognized', {name: gestureName, hit: hit} );
-  };
+  }
 
   function _gestureUnknown( bestHit, closestGestureName ){
     PlumaApp.trigger( 'plumaleap:gesture-unknown', { name: closestGestureName, hit: bestHit } );
-  };
+  }
 
   // Public API
 
   function publicStart(){
     _init();
-  };
+  }
 
   return {
     start: publicStart

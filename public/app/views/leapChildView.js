@@ -11,9 +11,9 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
   template: '#leap-trainer-tpl',
 
   events: {
-    'click .start-trainer':   'newGesture',
-    'click .reset':      'resetGesture',
-    'click .delete':     'deleteGesture'
+    'click .start-trainer' : 'newGesture',
+    'click .reset'         : 'resetGesture',
+    'click .delete'        : 'deleteGesture'
   },
 
   initialize: function(){
@@ -148,12 +148,11 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
     PlumaApp.Storage.each(function( key, result ){
       if ( ( result.type === PlumaApp.TYPES['GESTURE'] ) && ( result.data.json ) ) {
 
-        $userGestures.append( tpl({ gestName: result.data.name }) );
-
         var decompressed = LZString.decompressFromUTF16(result.data.json);
 
         if ( ( decompressed ) && ( typeof decompressed === 'string' ) ){
           PlumaApp.trainer.fromJSON( decompressed );
+          $userGestures.append( tpl({ gestName: result.data.name }) );
         }
       }
     });
