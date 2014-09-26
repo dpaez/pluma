@@ -43,11 +43,11 @@ var PlumaAppMain = function( _, Backbone, $, SimpleStorage, Points, PlumaApp ) {
     };
 
     // Create PlumaApp sockets
-    PlumaApp.socket = io.connect( PlumaApp.SOCKETS.HOST + ':' + PlumaApp.SOCKETS.PORT );
+    //PlumaApp.socket = io.connect( PlumaApp.SOCKETS.HOST + ':' + PlumaApp.SOCKETS.PORT );
 
     // PlumaApp sockets events
-    PlumaApp.socket.emit( 'plumaduino:components_status' );
-    PlumaApp.socket.on( 'plumaduino:components_attached', _.bind(_addComponents, this) );
+    //PlumaApp.socket.emit( 'plumaduino:components_status' );
+    //PlumaApp.socket.on( 'plumaduino:components_attached', _.bind(_addComponents, this) );
 
     // Attach points app
     PlumaApp.Points = Points;
