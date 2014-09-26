@@ -180,13 +180,16 @@ PlumaApp.LeapDuinoView = PlumaApp.BaseView.extend({
     $gestureElem.addClass( 'linked' );
 
     PlumaApp.trainer.on( gestureName, function(){
-      console.log( 'gesture-component binding triggered: %s %s', gestureName, componentID );
+      console.log( 'gesture-component binding triggered: %s %s | action: %s | params: %s', gestureName, componentID, action, params );
 
+      var actionFilters = PlumaApp.Storage.fetch( gestureName + componentID ).data;
+      console.log( 'actionFilters is: ', actionFilters );
       PlumaApp.socket.emit( 'plumaduino:component_do', {
         componentID: componentID,
         componentType: componentType,
         action: action,
-        params: params
+        params: params,
+        filters: actionFilters
       });
 
       PlumaApp.trigger( 'plumaleap:gesture-component-fire', {

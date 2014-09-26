@@ -47,7 +47,8 @@ PlumaApp.LeapView = PlumaApp.BaseView.extend({
   },
 
   leapNotReady: function(){
-    this.$el.faceOut( 'slow' );
+    this.writeWarning( 'Leap no esta listo.' );
+    this.$el.fadeOut( 'slow' );
   },
 
   leapReady: function(){

@@ -29,7 +29,7 @@ PlumaApp.LeapDuinoConfigView = Backbone.ModalView.extend({
       stored;
 
     data = this.getFormValues();
-
+    console.log( 'form config data: ', data );
     // create new gesture + component config object
     gestureComponentData = {};
 

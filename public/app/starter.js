@@ -37,17 +37,18 @@ var PlumaAppMain = function( _, Backbone, $, SimpleStorage, Points, PlumaApp ) {
         prefix = prefix || 'key_';
         var id = undefined;
         if ( options.pin ){ id = prefix + options.pin.toString() };
+        if ( options.pwm ){ id = prefix + options.pwm.toString() };
         if ( options.pins ){ id = prefix + options.pins.toString() };
         return id;
       },
     };
 
     // Create PlumaApp sockets
-    //PlumaApp.socket = io.connect( PlumaApp.SOCKETS.HOST + ':' + PlumaApp.SOCKETS.PORT );
+    PlumaApp.socket = io.connect( PlumaApp.SOCKETS.HOST + ':' + PlumaApp.SOCKETS.PORT );
 
     // PlumaApp sockets events
-    //PlumaApp.socket.emit( 'plumaduino:components_status' );
-    //PlumaApp.socket.on( 'plumaduino:components_attached', _.bind(_addComponents, this) );
+    PlumaApp.socket.emit( 'plumaduino:components_status' );
+    PlumaApp.socket.on( 'plumaduino:components_attached', _.bind(_addComponents, this) );
 
     // Attach points app
     PlumaApp.Points = Points;
