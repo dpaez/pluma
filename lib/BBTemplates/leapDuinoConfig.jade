@@ -15,6 +15,8 @@ script(type='text/template', id='leapduino-setup-tpl')
           label(for='power-filter') SUAVE
         span.item-row
           label(for='discrete-filter') DISCRETO
+        span.item-row
+          label(for='mediate-filter') MEDIADO
 
       div.item-config.center
         span.item-row
@@ -28,6 +30,9 @@ script(type='text/template', id='leapduino-setup-tpl')
         span.item-row
           input(type='radio', name='discrete-continous-filter', id='discrete-filter', value='', checked)
           input(type='radio', name='discrete-continous-filter', id='continous-filter', value='')
+        span.item-row
+          input(type='radio', name='mediate-direct-filter', id='mediate-filter', value='', checked)
+          input(type='radio', name='mediate-direct-filter', id='direct-filter', value='')
 
       div.item-labels
         span.item-row
@@ -36,6 +41,8 @@ script(type='text/template', id='leapduino-setup-tpl')
           label(for='power-filter') INTENSO
         span.item-row
           label(for='continous-filter') CONTINUO
+        span.item-row
+          label(for='direct-filter') DIRECTO
 
       div.center.config-end
         input(id='confirmLeapDuinoConfig', class='button button-border-primary button-large', type='submit', value='Aplicar')

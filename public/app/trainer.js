@@ -45,7 +45,7 @@ PlumaApp.LeapTrainer = function( _, Backbone, Leap, LeapTrainer ) {
     // Specific module events
     PlumaApp.on({
        'plumaleap:create': _train,
-       'plumaleap:reset':  _reset,
+       'plumaleap:reset':  _reset
     });
 
     // Leap Trainer Events

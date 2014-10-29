@@ -16,6 +16,7 @@ PlumaApp.SandboxView = PlumaApp.BaseView.extend({
   initialize: function(){
     this.listenTo( PlumaApp, 'plumaleap:gesture-component-fire', this.alertTrigger );
     this.listenTo( this, 'render', this.loadMetaphor );
+    this.listenTo( this, 'metaphor-rendered', this.checkInteractionProps );
   },
 
   onRender: function(){
@@ -44,10 +45,22 @@ PlumaApp.SandboxView = PlumaApp.BaseView.extend({
 
     this.metaphor = new PlumaApp.Metaphor( {el:$('#choosen_metaphor')} );
     this.metaphor.render();
+    this.trigger('metaphor-rendered');
+  },
 
+  checkInteractionProps: function(){
+    var config = PlumaApp.Storage.fetch('interactionconfig');
+    if ( config.mediatedFilter ){
+      // The output is now mediated by an extra input (button)
+      var div = document.createElement('div');
+      div.id = 'mediatedAction';
+      div.style.position = 'absolute';
+      div.style.bottom = '2%';
+      div.style.left = '45%';
+      $( '#choosen_metaphor' ).append( div );
+      this.mediatedInteraction = new PlumaApp.MediatedView( {el:$('#mediatedAction')} );
+      this.mediatedInteraction.render();
+    }
   }
-
-
-
 
 });

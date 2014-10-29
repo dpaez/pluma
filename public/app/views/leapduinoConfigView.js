@@ -29,7 +29,7 @@ PlumaApp.LeapDuinoConfigView = Backbone.ModalView.extend({
       stored;
 
     data = this.getFormValues();
-    console.log( 'form config data: ', data );
+    this.persistConfigValues( data );
     // create new gesture + component config object
     gestureComponentData = {};
 
@@ -63,10 +63,21 @@ PlumaApp.LeapDuinoConfigView = Backbone.ModalView.extend({
 
     values.instantFilter = $configItems.find( '#instant-filter' ).val() || undefined;
     values.powerFilter = $configItems.find( '#power-filter' ).val() || undefined;
-    values.discreteFilter = $configItems.find( '#discrete-filter' ).val() || false;
-    values.continousFilter = $configItems.find( '#continous-filter' ).val() || false;
+    values.discreteFilter = $configItems.find( '#discrete-filter' ).attr('checked') ? true : false;
+    values.continousFilter = $configItems.find( '#continous-filter' ).attr('checked') ? true : false;
+    values.mediatedFilter = $configItems.find( '#mediate-filter' ).attr('checked') ? true : false;
+    values.directFilter = $configItems.find( '#direct-filter' ).attr('checked') ? true : false;
 
     return values;
+  },
+
+  /**
+   * persistConfigValues Saves interaction config object. This is done in
+   * order to add external components on the final stage.
+   * @param  {Object} data An interaction configuration object.
+   */
+  persistConfigValues: function( data ){
+    PlumaApp.Storage.put( 'interactionconfig', data );
   }
 
 });
