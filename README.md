@@ -5,10 +5,11 @@ Proyecto Pluma
 
 ## Instalación
 
-### Requisitos Previos:
+#### Requisitos Previos:
 - node.js instalado (ver [http://nodejs.org/](nodejs.org))
 - [opcional/recomendado] Contar con [https://github.com/creationix/nvm](nvm) instalado o algun manejador de versiones de node.
 
+Luego:
 1. ```git clone https://github.com/dpaez/pluma.git && cd pluma```
 2. ```npm install && bower install```
 3. ```node app.js```
