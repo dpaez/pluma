@@ -13,7 +13,7 @@ Proyecto Pluma
 1. ```git clone https://github.com/dpaez/pluma.git && cd pluma```
 2. ```npm install && bower install```
 3. ```node app.js```
-4. Abrir browser en localhost:3000
+4. Abrir browser en [localhost:3000/dash](http://localhost:3000/dash)
 
 
 
