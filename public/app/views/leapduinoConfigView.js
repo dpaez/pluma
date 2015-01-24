@@ -63,10 +63,10 @@ PlumaApp.LeapDuinoConfigView = Backbone.ModalView.extend({
 
     values.instantFilter = $configItems.find( '#instant-filter' ).val() || undefined;
     values.powerFilter = $configItems.find( '#power-filter' ).val() || undefined;
-    values.discreteFilter = $configItems.find( '#discrete-filter' ).attr('checked') ? true : false;
-    values.continousFilter = $configItems.find( '#continous-filter' ).attr('checked') ? true : false;
-    values.mediatedFilter = $configItems.find( '#mediate-filter' ).attr('checked') ? true : false;
-    values.directFilter = $configItems.find( '#direct-filter' ).attr('checked') ? true : false;
+    values.discreteFilter = $configItems.find( '#discrete-filter' ).attr( 'checked' ) ? true : false;
+    values.continousFilter = $configItems.find( '#continous-filter' ).attr( 'checked' ) ? true : false;
+    values.mediatedFilter = $configItems.find( '#mediate-filter' ).attr( 'checked' ) ? true : false;
+    values.directFilter = $configItems.find( '#direct-filter' ).attr( 'checked' ) ? true : false;
 
     return values;
   },
